@@ -5,937 +5,774 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио разработчика</title>
     <style>
-        /* ===== Глобальные переменные и сброс ===== */
+        /* ===== СБРОС ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-card: #1a1a1a;
-            --accent: #00a8ff;
-            --accent-hover: #0090e0;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --danger: #e94560;
-            --success: #00cc88;
-            --border: #2a2a4a;
-            --shadow: 0 5px 15px rgba(0,0,0,0.5);
-            --transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            background: #0a0c0f;
+            color: #e0e0e0;
             line-height: 1.6;
-            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* ===== Навигация ===== */
-        .navbar {
-            background-color: var(--bg-secondary);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* ===== СТИЛИ ===== */
+        .glass {
+            background: rgba(20, 30, 40, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== ШАПКА ===== */
+        header {
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent);
-            cursor: pointer;
-            transition: var(--transition);
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a0e0ff, #6c8cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .logo:hover {
-            text-shadow: 0 0 10px var(--accent);
-        }
-
-        .nav-links {
+        nav ul {
             display: flex;
-            gap: 2rem;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .nav-links a {
-            color: var(--text-primary);
+        nav a {
+            color: #ccc;
             text-decoration: none;
             font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 40px;
+            transition: 0.3s;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid transparent;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
+        nav a:hover,
+        nav a.active {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: #4a80f0;
+            color: white;
         }
 
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+        main {
+            flex: 1;
         }
 
-        .user-name {
-            color: var(--accent);
+        section {
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
 
-        /* ===== Кнопки ===== */
+        section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #aac8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
         .btn {
-            padding: 0.75rem 1.5rem;
+            display: inline-block;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #2a4c7c, #1a2f4f);
+            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            background-color: var(--accent);
-            color: white;
-            font-size: 0.9rem;
+            transition: 0.3s;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 15px rgba(0,40,100,0.5);
         }
 
         .btn:hover {
-            background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,168,255,0.3);
+            box-shadow: 0 8px 25px rgba(0,80,160,0.6);
+            background: linear-gradient(135deg, #2f5a94, #1f3a60);
         }
 
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #4a80f0;
+            color: #4a80f0;
+            box-shadow: none;
         }
 
-        .btn-secondary:hover {
-            background-color: var(--accent);
+        .btn-outline:hover {
+            background: #4a80f0;
             color: white;
         }
 
-        .btn-danger {
-            background-color: var(--danger);
-        }
-
-        .btn-danger:hover {
-            background-color: #c03040;
-        }
-
-        /* ===== Карточки проектов ===== */
-        .projects-grid {
+        /* ===== КАРТОЧКИ ===== */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
-        .project-card {
-            background-color: var(--bg-card);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: var(--transition);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,168,255,0.2);
-        }
-
-        .project-img {
-            height: 200px;
-            background: linear-gradient(45deg, var(--accent), #6a0dad);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-
-        .project-type {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            background-color: var(--accent);
-            color: white;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-desc {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        /* ===== Формы ===== */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0,168,255,0.1);
-        }
-
-        /* ===== Модальные окна ===== */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition);
-        }
-
-        .modal.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .modal-content {
-            background-color: var(--bg-secondary);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            padding: 2rem;
-            position: relative;
-            box-shadow: var(--shadow);
-            transform: translateY(-20px);
-            transition: var(--transition);
-        }
-
-        .modal.active .modal-content {
-            transform: translateY(0);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
+        .card {
+            background: rgba(30, 40, 55, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 24px;
+            transition: 0.4s;
             cursor: pointer;
-            color: var(--text-secondary);
         }
 
-        /* ===== Уведомления ===== */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            padding: 1rem 2rem;
-            background-color: var(--bg-card);
-            border-left: 4px solid var(--accent);
-            border-radius: 5px;
-            box-shadow: var(--shadow);
-            color: var(--text-primary);
-            z-index: 1001;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #4a80f0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
-        .toast.show {
-            transform: translateX(0);
+        .card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
         }
 
-        /* ===== Поиск и фильтры ===== */
-        .search-bar {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
+        .card p {
+            color: #a0a0b0;
+            margin-bottom: 20px;
         }
 
-        .search-bar input,
-        .search-bar select {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.75rem;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            color: var(--text-primary);
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(74, 128, 240, 0.2);
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #aac8ff;
+            margin-bottom: 16px;
         }
 
-        /* ===== Адаптивность ===== */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            .nav-links {
-                margin: 1rem 0;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+        /* ===== ФОРМЫ ===== */
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        /* ===== Секции (страницы) ===== */
-        .page {
-            display: none;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .page.active {
+        label {
             display: block;
+            margin-bottom: 8px;
+            color: #b0c0d0;
         }
 
-        /* Главная страница */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #2a3a50;
+            border-radius: 16px;
+            color: white;
+            font-size: 1rem;
+            transition: 0.3s;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4a80f0;
+            box-shadow: 0 0 0 3px rgba(74,128,240,0.3);
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .hero-buttons {
+        /* ===== ПРОФИЛЬ ===== */
+        .profile-header {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
-        /* Профиль */
-        .profile-info {
-            background-color: var(--bg-card);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
+        .avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #2a4c7c, #1a2f4f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            border: 3px solid #4a80f0;
         }
 
         .orders-list {
             list-style: none;
-            margin-top: 1rem;
         }
 
-        .orders-list li {
-            padding: 1rem;
-            background-color: var(--bg-secondary);
-            border-radius: 5px;
-            margin-bottom: 0.5rem;
+        .order-item {
+            background: rgba(40, 50, 70, 0.6);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4a80f0;
         }
 
-        /* Админка */
-        .admin-section {
-            margin-bottom: 2rem;
+        /* ===== АДМИНКА ===== */
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
+        .delete-order {
+            background: #d32f2f;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
         }
 
-        .admin-table th,
-        .admin-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
+        /* ===== ПОДВАЛ ===== */
+        footer {
+            margin-top: 60px;
+            padding: 30px 0;
+            text-align: center;
+            color: #7f8fa0;
         }
 
-        .admin-table th {
-            color: var(--accent);
+        /* ===== АДАПТАЦИЯ ===== */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav ul {
+                justify-content: center;
+            }
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Навигация -->
-    <nav class="navbar">
-        <div class="logo" onclick="showPage('home')">DevPortfolio</div>
-        <div class="nav-links">
-            <a href="#" onclick="showPage('home')">Главная</a>
-            <a href="#" onclick="showPage('projects')">Проекты</a>
-            <a href="#" onclick="showPage('order')">Заказать</a>
-            <a href="#" id="profile-link" style="display:none;" onclick="showPage('profile')">Профиль</a>
-            <a href="#" id="admin-link" style="display:none;" onclick="showPage('admin')">Админка</a>
-            <a href="#" onclick="showPage('login')" id="login-link">Войти</a>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">DEV PORTFOLIO</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" data-section="home">Главная</a></li>
+                        <li><a href="#" data-section="works">Мои работы</a></li>
+                        <li><a href="#" data-section="order">Заказать</a></li>
+                        <li><a href="#" data-section="profile">Профиль</a></li>
+                        <li><a href="#" data-section="admin">Админ</a></li>
+                        <li><a href="#" data-section="auth">Вход</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="user-menu" id="user-menu" style="display:none;">
-            <span class="user-name" id="user-name"></span>
-            <button class="btn btn-secondary" onclick="logout()">Выйти</button>
-        </div>
-    </nav>
+    </header>
 
-    <!-- Основной контейнер для страниц -->
-    <main id="main-content"></main>
-
-    <!-- Модальные окна -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div id="modal-content"></div>
-        </div>
-    </div>
-
-    <!-- Уведомления -->
-    <div class="toast" id="toast"></div>
-
-    <!-- Шаблоны страниц (скрыты) -->
-    <div id="page-templates" style="display:none;">
+    <main class="container">
         <!-- Главная -->
-        <div id="home-page">
-            <div class="hero">
-                <h1>Привет, я разработчик</h1>
-                <p>Создаю современные сайты, ботов и приложения. Более 5 лет опыта.</p>
-                <div class="hero-buttons">
-                    <button class="btn" onclick="showPage('projects')">Мои проекты</button>
-                    <button class="btn" onclick="showPage('order')">Заказать разработку</button>
-                    <button class="btn btn-secondary" onclick="showPage('profile')">О разработчике</button>
-                    <button class="btn btn-secondary" onclick="showPage('login')">Войти / Регистрация</button>
+        <section id="home" class="active-section">
+            <div class="glass" style="padding: 60px; text-align: center;">
+                <h1>Привет, я разработчик<br>создаю сайты, ботов, приложения</h1>
+                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
+                    Современные веб-решения с использованием React, Node.js, Python. 
+                    Более 3 лет опыта, более 20 успешных проектов.
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn" data-section="works">Мои проекты</button>
+                    <button class="btn btn-outline" data-section="order">Заказать разработку</button>
+                    <button class="btn btn-outline" data-section="profile">Контакты</button>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Проекты (список) -->
-        <div id="projects-page">
-            <h1>Мои проекты</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Поиск проектов..." id="project-search">
-                <select id="project-filter">
-                    <option value="all">Все типы</option>
-                    <option value="сайт">Сайты</option>
-                    <option value="бот">Боты</option>
-                    <option value="приложение">Приложения</option>
-                </select>
+        <!-- Мои работы (каталог проектов) -->
+        <section id="works">
+            <h2>Мои работы</h2>
+            <div class="cards-grid" id="projects-list">
+                <!-- JS заполнит карточками -->
             </div>
-            <div class="projects-grid" id="projects-grid"></div>
-        </div>
+        </section>
 
-        <!-- Страница конкретного проекта (динамически) -->
-        <div id="project-detail-page">
-            <button class="btn btn-secondary" onclick="showPage('projects')">← Назад к проектам</button>
-            <div id="project-detail-content"></div>
-        </div>
-
-        <!-- Заказ -->
-        <div id="order-page">
-            <h1>Заказать разработку</h1>
-            <form id="order-form">
-                <div class="form-group">
-                    <label for="order-name">Имя</label>
-                    <input type="text" id="order-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="order-email">Email</label>
-                    <input type="email" id="order-email" required>
-                </div>
-                <div class="form-group">
-                    <label for="order-type">Тип проекта</label>
-                    <select id="order-type">
-                        <option value="сайт">Сайт</option>
-                        <option value="бот">Бот</option>
-                        <option value="приложение">Приложение</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="order-budget">Бюджет</label>
-                    <input type="number" id="order-budget" placeholder="₽" required>
-                </div>
-                <div class="form-group">
-                    <label for="order-description">Описание проекта</label>
-                    <textarea id="order-description" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn">Отправить заказ</button>
-            </form>
-        </div>
-
-        <!-- Регистрация / Вход (комбинированное) -->
-        <div id="login-page">
-            <h1>Вход / Регистрация</h1>
-            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-                <div style="flex:1;">
-                    <h2>Вход</h2>
-                    <form id="login-form">
-                        <div class="form-group">
-                            <label for="login-email">Email</label>
-                            <input type="email" id="login-email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="login-password">Пароль</label>
-                            <input type="password" id="login-password" required>
-                        </div>
-                        <button type="submit" class="btn">Войти</button>
-                    </form>
-                </div>
-                <div style="flex:1;">
-                    <h2>Регистрация</h2>
-                    <form id="register-form">
-                        <div class="form-group">
-                            <label for="register-name">Имя</label>
-                            <input type="text" id="register-name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="register-email">Email</label>
-                            <input type="email" id="register-email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="register-password">Пароль</label>
-                            <input type="password" id="register-password" required>
-                        </div>
-                        <button type="submit" class="btn">Зарегистрироваться</button>
-                    </form>
-                </div>
+        <!-- Детальная страница проекта (открывается из карточки) -->
+        <section id="project-detail">
+            <button class="btn btn-outline" id="back-to-works" style="margin-bottom: 20px;">← Назад к работам</button>
+            <div class="glass" style="padding: 40px;" id="project-detail-content">
+                <!-- JS вставит данные -->
             </div>
-        </div>
+        </section>
+
+        <!-- Заказать разработку -->
+        <section id="order">
+            <h2>Заказать разработку</h2>
+            <div class="glass" style="padding: 40px;">
+                <form id="order-form">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" id="order-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="order-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Тип проекта</label>
+                        <select id="order-type">
+                            <option value="site">Сайт</option>
+                            <option value="bot">Бот</option>
+                            <option value="app">Приложение</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Описание</label>
+                        <textarea id="order-desc" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить заказ</button>
+                </form>
+            </div>
+        </section>
 
         <!-- Профиль пользователя -->
-        <div id="profile-page">
-            <h1>Профиль</h1>
-            <div class="profile-info" id="profile-info"></div>
-            <h2>Мои заказы</h2>
-            <ul class="orders-list" id="profile-orders"></ul>
-            <button class="btn btn-secondary" onclick="editProfile()">Редактировать профиль</button>
-            <button class="btn btn-danger" onclick="logout()">Выйти</button>
-        </div>
+        <section id="profile">
+            <h2>Профиль</h2>
+            <div class="glass" style="padding: 40px;">
+                <div class="profile-header">
+                    <div class="avatar" id="profile-avatar">👤</div>
+                    <div style="flex:1">
+                        <h3 id="profile-name">Имя пользователя</h3>
+                        <button class="btn btn-outline" id="edit-profile-btn">Редактировать</button>
+                        <button class="btn btn-outline" id="logout-btn">Выйти</button>
+                    </div>
+                </div>
+                <div id="edit-profile-form" style="display: none; margin-top: 30px;">
+                    <h3>Редактировать профиль</h3>
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" id="edit-name">
+                    </div>
+                    <div class="form-group">
+                        <label>Аватар (URL или эмодзи)</label>
+                        <input type="text" id="edit-avatar" placeholder="Например: 👨‍💻">
+                    </div>
+                    <button class="btn" id="save-profile">Сохранить</button>
+                </div>
+                <div style="margin-top: 40px;">
+                    <h3>Мои заказы</h3>
+                    <div id="profile-orders"></div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Админ-панель -->
-        <div id="admin-page">
-            <h1>Админ-панель</h1>
-            <div class="admin-section">
-                <h2>Пользователи</h2>
-                <table class="admin-table" id="admin-users"></table>
+        <!-- Админ панель -->
+        <section id="admin">
+            <h2>Админ панель</h2>
+            <div class="glass" style="padding: 40px;">
+                <h3>Все заказы</h3>
+                <div id="admin-orders"></div>
             </div>
-            <div class="admin-section">
-                <h2>Заказы</h2>
-                <table class="admin-table" id="admin-orders"></table>
+        </section>
+
+        <!-- Авторизация / Регистрация -->
+        <section id="auth">
+            <h2>Вход / Регистрация</h2>
+            <div class="glass" style="padding: 40px; max-width: 500px; margin: 0 auto;">
+                <div style="display: flex; gap: 10px; margin-bottom: 30px;">
+                    <button class="btn" id="show-login">Вход</button>
+                    <button class="btn btn-outline" id="show-register">Регистрация</button>
+                </div>
+                <div id="login-form">
+                    <div class="form-group">
+                        <label>Логин</label>
+                        <input type="text" id="login-username">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" id="login-password">
+                    </div>
+                    <button class="btn" id="login-btn">Войти</button>
+                </div>
+                <div id="register-form" style="display: none;">
+                    <div class="form-group">
+                        <label>Логин</label>
+                        <input type="text" id="reg-username">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" id="reg-password">
+                    </div>
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" id="reg-name">
+                    </div>
+                    <button class="btn" id="register-btn">Зарегистрироваться</button>
+                </div>
             </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Dev Portfolio. Все права защищены.</p>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // ===============================================
-        // Глобальные данные и константы
-        // ===============================================
-        const ADMIN_EMAIL = 'admin@admin.com';
-        const ADMIN_PASSWORD = 'admin';
+        (function() {
+            // ==================== ДАННЫЕ ====================
+            // Статические проекты для портфолио
+            const projectsData = [
+                { id: 1, title: 'Интернет-магазин', type: 'сайт', description: 'Полноценный интернет-магазин на React + Node.js', image: '🛒', details: 'Разработан современный интернет-магазин с корзиной, фильтрами и админ-панелью.' },
+                { id: 2, title: 'Telegram бот для заказа еды', type: 'бот', description: 'Бот на Python с интеграцией платежей', image: '🤖', details: 'Бот позволяет выбирать блюда, оформлять заказы и оплачивать картой.' },
+                { id: 3, title: 'Мобильное приложение для заметок', type: 'приложение', description: 'React Native, синхронизация с облаком', image: '📱', details: 'Кроссплатформенное приложение для iOS и Android с авторизацией.' },
+                { id: 4, title: 'Корпоративный сайт компании', type: 'сайт', description: 'Лендинг с анимациями и формой обратной связи', image: '🏢', details: 'Одностраничный сайт с параллаксом и оптимизацией SEO.' },
+            ];
 
-        // Проекты (статическое портфолио)
-        const projects = [
-            { id: 1, title: 'Интернет-магазин', type: 'сайт', description: 'Полноценный интернет-магазин на React + Node.js', image: '🛒', details: 'Разработан интернет-магазин с корзиной, оплатой, админкой. Использованы React, Redux, Node.js, MongoDB.', features: ['Корзина', 'Оплата онлайн', 'Личный кабинет', 'Админ-панель'] },
-            { id: 2, title: 'Telegram-бот для заказа еды', type: 'бот', description: 'Бот с каталогом и оплатой через Telegram Stars', image: '🤖', details: 'Бот позволяет выбирать блюда, оформлять заказ, оплачивать звездами. Использована библиотека aiogram.', features: ['Каталог', 'Корзина', 'Оплата звездами', 'Уведомления'] },
-            { id: 3, title: 'Мобильное приложение для трекинга задач', type: 'приложение', description: 'Кроссплатформенное приложение на Flutter', image: '📱', details: 'Приложение для управления задачами с синхронизацией через Firebase.', features: ['Авторизация', 'Создание задач', 'Напоминания', 'Статистика'] },
-            { id: 4, title: 'Сайт-портфолио', type: 'сайт', description: 'Одностраничный сайт с анимациями', image: '🎨', details: 'Современный сайт-портфолио с параллаксом и плавными анимациями.', features: ['Адаптивность', 'Анимации', 'Оптимизация SEO'] },
-        ];
+            // Ключи localStorage
+            const STORAGE_USERS = 'portfolio_users';
+            const STORAGE_CURRENT_USER = 'portfolio_current_user';
+            const STORAGE_ORDERS = 'portfolio_orders';
 
-        // ===============================================
-        // LocalStorage управление
-        // ===============================================
-        function getUsers() {
-            return JSON.parse(localStorage.getItem('users')) || [];
-        }
+            // Инициализация хранилищ
+            if (!localStorage.getItem(STORAGE_USERS)) {
+                localStorage.setItem(STORAGE_USERS, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(STORAGE_ORDERS)) {
+                localStorage.setItem(STORAGE_ORDERS, JSON.stringify([]));
+            }
 
-        function saveUsers(users) {
-            localStorage.setItem('users', JSON.stringify(users));
-        }
+            // ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
+            function showSection(sectionId) {
+                document.querySelectorAll('main section').forEach(s => s.classList.remove('active-section'));
+                document.getElementById(sectionId).classList.add('active-section');
+                // подсветка меню
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                document.querySelector(`nav a[data-section="${sectionId}"]`)?.classList.add('active');
+            }
 
-        function getOrders() {
-            return JSON.parse(localStorage.getItem('orders')) || [];
-        }
+            // Обновление интерфейса в зависимости от авторизации
+            function updateAuthUI() {
+                const currentUser = getCurrentUser();
+                const profileSection = document.getElementById('profile');
+                const authSection = document.getElementById('auth');
+                const adminLink = document.querySelector('nav a[data-section="admin"]');
+                const profileLink = document.querySelector('nav a[data-section="profile"]');
+                const authLink = document.querySelector('nav a[data-section="auth"]');
 
-        function saveOrders(orders) {
-            localStorage.setItem('orders', JSON.stringify(orders));
-        }
+                if (currentUser) {
+                    // Пользователь залогинен
+                    profileLink.style.display = 'inline-block';
+                    authLink.textContent = 'Выйти';
+                    authLink.dataset.section = 'logout'; // обработаем отдельно
+                    if (currentUser.username === 'admin') { // простой флаг админа
+                        adminLink.style.display = 'inline-block';
+                    } else {
+                        adminLink.style.display = 'none';
+                    }
+                    // Загрузить данные в профиль
+                    renderProfile();
+                } else {
+                    profileLink.style.display = 'none';
+                    adminLink.style.display = 'none';
+                    authLink.textContent = 'Вход';
+                    authLink.dataset.section = 'auth';
+                }
+            }
 
-        // Текущий пользователь (сессия)
-        let currentUser = null;
+            function getCurrentUser() {
+                const data = localStorage.getItem(STORAGE_CURRENT_USER);
+                return data ? JSON.parse(data) : null;
+            }
 
-        // ===============================================
-        // Уведомления (тосты)
-        // ===============================================
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast show';
-            if (type === 'error') toast.style.borderLeftColor = 'var(--danger)';
-            else toast.style.borderLeftColor = 'var(--accent)';
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+            function setCurrentUser(user) {
+                if (user) {
+                    localStorage.setItem(STORAGE_CURRENT_USER, JSON.stringify(user));
+                } else {
+                    localStorage.removeItem(STORAGE_CURRENT_USER);
+                }
+                updateAuthUI();
+            }
 
-        // ===============================================
-        // Модальные окна
-        // ===============================================
-        function openModal(content) {
-            document.getElementById('modal-content').innerHTML = content;
-            document.getElementById('modal').classList.add('active');
-        }
+            // Получить всех пользователей
+            function getUsers() {
+                return JSON.parse(localStorage.getItem(STORAGE_USERS)) || [];
+            }
 
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-        }
+            function saveUsers(users) {
+                localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+            }
 
-        // ===============================================
-        // SPA: переключение страниц
-        // ===============================================
-        function showPage(page, param = null) {
-            const main = document.getElementById('main-content');
-            // Загружаем шаблон нужной страницы
-            const template = document.getElementById(`${page}-page`);
-            if (!template) return;
-            main.innerHTML = template.innerHTML;
+            // Заказы
+            function getOrders() {
+                return JSON.parse(localStorage.getItem(STORAGE_ORDERS)) || [];
+            }
 
-            // Обновляем активную ссылку в меню
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            const activeLink = document.querySelector(`[onclick*="'${page}'"]`);
-            if (activeLink) activeLink.classList.add('active');
+            function saveOrders(orders) {
+                localStorage.setItem(STORAGE_ORDERS, JSON.stringify(orders));
+            }
 
-            // Вызываем инициализацию страницы
-            if (page === 'projects') initProjectsPage();
-            else if (page === 'project-detail' && param) showProjectDetail(param);
-            else if (page === 'order') initOrderPage();
-            else if (page === 'login') initLoginPage();
-            else if (page === 'profile') initProfilePage();
-            else if (page === 'admin') initAdminPage();
+            // Добавить заказ
+            function addOrder(order) {
+                const orders = getOrders();
+                const newOrder = {
+                    id: Date.now(),
+                    ...order,
+                    userId: getCurrentUser()?.id || null,
+                    date: new Date().toLocaleString()
+                };
+                orders.push(newOrder);
+                saveOrders(orders);
+            }
 
-            // Прокрутка вверх
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ===============================================
-        // Проекты: отрисовка с поиском и фильтром
-        // ===============================================
-        function initProjectsPage() {
-            const grid = document.getElementById('projects-grid');
-            const searchInput = document.getElementById('project-search');
-            const filterSelect = document.getElementById('project-filter');
-
+            // ==================== РЕНДЕР КАРТОЧЕК ПРОЕКТОВ ====================
             function renderProjects() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const filter = filterSelect.value;
-                const filtered = projects.filter(p => 
-                    (filter === 'all' || p.type === filter) &&
-                    (p.title.toLowerCase().includes(searchTerm) || p.description.toLowerCase().includes(searchTerm))
-                );
-                grid.innerHTML = filtered.map(p => `
-                    <div class="project-card">
-                        <div class="project-img">${p.image}</div>
-                        <div class="project-content">
-                            <h3 class="project-title">${p.title}</h3>
-                            <span class="project-type">${p.type}</span>
-                            <p class="project-desc">${p.description}</p>
-                            <button class="btn" onclick="showPage('project-detail', ${p.id})">Подробнее</button>
+                const container = document.getElementById('projects-list');
+                container.innerHTML = '';
+                projectsData.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="badge">${p.type}</div>
+                        <h3>${p.title}</h3>
+                        <p>${p.description}</p>
+                        <button class="btn btn-outline" data-project-id="${p.id}">Открыть</button>
+                    `;
+                    card.querySelector('button').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        showProjectDetail(p.id);
+                    });
+                    container.appendChild(card);
+                });
+            }
+
+            function showProjectDetail(projectId) {
+                const project = projectsData.find(p => p.id == projectId);
+                if (!project) return;
+                const detailDiv = document.getElementById('project-detail-content');
+                detailDiv.innerHTML = `
+                    <h2>${project.title}</h2>
+                    <div class="badge">${project.type}</div>
+                    <p style="font-size: 3rem;">${project.image}</p>
+                    <p>${project.details}</p>
+                    <p><strong>Стек:</strong> React, Node.js, MongoDB (пример)</p>
+                    <button class="btn" style="margin-top:20px;" onclick="alert('Ссылка на проект (демо)')">Перейти на сайт</button>
+                `;
+                showSection('project-detail');
+            }
+
+            // ==================== ПРОФИЛЬ ====================
+            function renderProfile() {
+                const user = getCurrentUser();
+                if (!user) return;
+                document.getElementById('profile-name').innerText = user.name || user.username;
+                document.getElementById('profile-avatar').innerText = user.avatar || '👤';
+                // Заказы пользователя
+                const orders = getOrders().filter(o => o.userId === user.id);
+                const ordersDiv = document.getElementById('profile-orders');
+                if (orders.length === 0) {
+                    ordersDiv.innerHTML = '<p>У вас пока нет заказов.</p>';
+                } else {
+                    ordersDiv.innerHTML = orders.map(o => `
+                        <div class="order-item">
+                            <strong>${o.type === 'site' ? 'Сайт' : o.type === 'bot' ? 'Бот' : 'Приложение'}</strong>
+                            <p>${o.description}</p>
+                            <small>${o.date}</small>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // ==================== АДМИНКА ====================
+            function renderAdminOrders() {
+                const orders = getOrders();
+                const container = document.getElementById('admin-orders');
+                if (orders.length === 0) {
+                    container.innerHTML = '<p>Нет заказов.</p>';
+                    return;
+                }
+                container.innerHTML = orders.map(o => `
+                    <div class="order-item">
+                        <p><strong>${o.name}</strong> (${o.email})</p>
+                        <p>Тип: ${o.type === 'site' ? 'Сайт' : o.type === 'bot' ? 'Бот' : 'Приложение'}</p>
+                        <p>Описание: ${o.description}</p>
+                        <p>Дата: ${o.date}</p>
+                        <div class="admin-actions">
+                            <button class="delete-order" data-id="${o.id}">Удалить</button>
                         </div>
                     </div>
                 `).join('');
+                document.querySelectorAll('.delete-order').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = Number(e.target.dataset.id);
+                        deleteOrder(id);
+                    });
+                });
             }
 
-            searchInput.addEventListener('input', renderProjects);
-            filterSelect.addEventListener('change', renderProjects);
-            renderProjects();
-        }
-
-        // Страница конкретного проекта
-        function showProjectDetail(id) {
-            const project = projects.find(p => p.id === id);
-            if (!project) return;
-            const main = document.getElementById('main-content');
-            main.innerHTML = document.getElementById('project-detail-page').innerHTML;
-            const content = document.getElementById('project-detail-content');
-            content.innerHTML = `
-                <h1>${project.title}</h1>
-                <div style="font-size:4rem; text-align:center; margin:1rem 0;">${project.image}</div>
-                <p><strong>Тип:</strong> ${project.type}</p>
-                <p><strong>Описание:</strong> ${project.details}</p>
-                <h3>Функции:</h3>
-                <ul>${project.features.map(f => `<li>${f}</li>`).join('')}</ul>
-                <button class="btn" onclick="alert('Ссылка на проект (демо)')">Открыть сайт</button>
-                <button class="btn btn-secondary" onclick="showPage('projects')">Назад</button>
-            `;
-        }
-
-        // ===============================================
-        // Заказ
-        // ===============================================
-        function initOrderPage() {
-            const form = document.getElementById('order-form');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const order = {
-                    id: Date.now(),
-                    name: document.getElementById('order-name').value,
-                    email: document.getElementById('order-email').value,
-                    type: document.getElementById('order-type').value,
-                    budget: document.getElementById('order-budget').value,
-                    description: document.getElementById('order-description').value,
-                    date: new Date().toLocaleString(),
-                };
-                const orders = getOrders();
-                orders.push(order);
+            function deleteOrder(id) {
+                let orders = getOrders().filter(o => o.id !== id);
                 saveOrders(orders);
-                showToast('Заказ отправлен!');
-                form.reset();
-            });
-        }
-
-        // ===============================================
-        // Вход / Регистрация
-        // ===============================================
-        function initLoginPage() {
-            const loginForm = document.getElementById('login-form');
-            const registerForm = document.getElementById('register-form');
-
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-                const users = getUsers();
-                const user = users.find(u => u.email === email && u.password === password);
-                if (user) {
-                    currentUser = user;
-                    updateUIAfterLogin();
-                    showPage('profile');
-                    showToast('Вход выполнен');
-                } else if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-                    // Администратор (не хранится в users)
-                    currentUser = { email: ADMIN_EMAIL, name: 'Admin', isAdmin: true };
-                    updateUIAfterLogin();
-                    showPage('admin');
-                    showToast('Вход как администратор');
-                } else {
-                    showToast('Неверный email или пароль', 'error');
-                }
-            });
-
-            registerForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('register-name').value;
-                const email = document.getElementById('register-email').value;
-                const password = document.getElementById('register-password').value;
-                const users = getUsers();
-                if (users.some(u => u.email === email)) {
-                    showToast('Пользователь с таким email уже существует', 'error');
-                    return;
-                }
-                const newUser = {
-                    id: Date.now(),
-                    name,
-                    email,
-                    password,
-                    registered: new Date().toLocaleString(),
-                };
-                users.push(newUser);
-                saveUsers(users);
-                currentUser = newUser;
-                updateUIAfterLogin();
-                showPage('profile');
-                showToast('Регистрация успешна');
-            });
-        }
-
-        function updateUIAfterLogin() {
-            document.getElementById('login-link').style.display = 'none';
-            document.getElementById('profile-link').style.display = 'inline';
-            document.getElementById('user-menu').style.display = 'flex';
-            document.getElementById('user-name').textContent = currentUser.name || currentUser.email;
-            if (currentUser.isAdmin) {
-                document.getElementById('admin-link').style.display = 'inline';
-            } else {
-                document.getElementById('admin-link').style.display = 'none';
+                renderAdminOrders();
             }
-        }
 
-        function logout() {
-            currentUser = null;
-            document.getElementById('login-link').style.display = 'inline';
-            document.getElementById('profile-link').style.display = 'none';
-            document.getElementById('admin-link').style.display = 'none';
-            document.getElementById('user-menu').style.display = 'none';
-            showPage('home');
-            showToast('Вы вышли');
-        }
+            // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+            document.addEventListener('DOMContentLoaded', () => {
+                renderProjects();
+                updateAuthUI();
 
-        // ===============================================
-        // Профиль
-        // ===============================================
-        function initProfilePage() {
-            if (!currentUser || currentUser.isAdmin) {
-                showPage('login');
-                return;
-            }
-            const infoDiv = document.getElementById('profile-info');
-            infoDiv.innerHTML = `
-                <p><strong>Имя:</strong> ${currentUser.name}</p>
-                <p><strong>Email:</strong> ${currentUser.email}</p>
-                <p><strong>Дата регистрации:</strong> ${currentUser.registered || 'не указана'}</p>
-            `;
-            const orders = getOrders().filter(o => o.email === currentUser.email);
-            const ordersList = document.getElementById('profile-orders');
-            if (orders.length === 0) {
-                ordersList.innerHTML = '<li>Нет заказов</li>';
-            } else {
-                ordersList.innerHTML = orders.map(o => `
-                    <li>
-                        <strong>${o.name}</strong> (${o.type}) - ${o.budget} ₽<br>
-                        <small>${o.description}</small><br>
-                        <em>${o.date}</em>
-                    </li>
-                `).join('');
-            }
-        }
+                // Навигация по ссылкам
+                document.querySelectorAll('nav a[data-section]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = link.dataset.section;
+                        if (section === 'logout') {
+                            // выйти
+                            setCurrentUser(null);
+                            showSection('home');
+                            return;
+                        }
+                        showSection(section);
+                        if (section === 'admin') renderAdminOrders();
+                        if (section === 'profile') renderProfile();
+                    });
+                });
 
-        function editProfile() {
-            const newName = prompt('Введите новое имя', currentUser.name);
-            if (newName && newName !== currentUser.name) {
-                const users = getUsers();
-                const userIndex = users.findIndex(u => u.email === currentUser.email);
-                if (userIndex !== -1) {
-                    users[userIndex].name = newName;
+                // Кнопки на главной
+                document.querySelectorAll('[data-section]').forEach(btn => {
+                    if (btn.tagName === 'BUTTON' && btn.dataset.section) {
+                        btn.addEventListener('click', () => showSection(btn.dataset.section));
+                    }
+                });
+
+                // Кнопка назад из детального просмотра
+                document.getElementById('back-to-works').addEventListener('click', () => showSection('works'));
+
+                // Форма заказа
+                document.getElementById('order-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('order-name').value;
+                    const email = document.getElementById('order-email').value;
+                    const type = document.getElementById('order-type').value;
+                    const desc = document.getElementById('order-desc').value;
+                    addOrder({ name, email, type, description: desc });
+                    alert('Заказ отправлен!');
+                    e.target.reset();
+                });
+
+                // Переключение между логином и регистрацией
+                document.getElementById('show-login').addEventListener('click', () => {
+                    document.getElementById('login-form').style.display = 'block';
+                    document.getElementById('register-form').style.display = 'none';
+                });
+                document.getElementById('show-register').addEventListener('click', () => {
+                    document.getElementById('login-form').style.display = 'none';
+                    document.getElementById('register-form').style.display = 'block';
+                });
+
+                // Регистрация
+                document.getElementById('register-btn').addEventListener('click', () => {
+                    const username = document.getElementById('reg-username').value.trim();
+                    const password = document.getElementById('reg-password').value.trim();
+                    const name = document.getElementById('reg-name').value.trim() || username;
+                    if (!username || !password) return alert('Заполните поля');
+                    const users = getUsers();
+                    if (users.find(u => u.username === username)) {
+                        return alert('Пользователь уже существует');
+                    }
+                    const newUser = { id: Date.now(), username, password, name, avatar: '👤' };
+                    users.push(newUser);
                     saveUsers(users);
-                    currentUser.name = newName;
-                    document.getElementById('user-name').textContent = newName;
-                    showToast('Профиль обновлён');
-                    initProfilePage();
-                }
-            }
-        }
+                    setCurrentUser(newUser);
+                    showSection('home');
+                });
 
-        // ===============================================
-        // Админ-панель
-        // ===============================================
-        function initAdminPage() {
-            if (!currentUser || !currentUser.isAdmin) {
-                showPage('home');
-                return;
-            }
-            const usersTable = document.getElementById('admin-users');
-            const ordersTable = document.getElementById('admin-orders');
+                // Логин
+                document.getElementById('login-btn').addEventListener('click', () => {
+                    const username = document.getElementById('login-username').value.trim();
+                    const password = document.getElementById('login-password').value.trim();
+                    const users = getUsers();
+                    const user = users.find(u => u.username === username && u.password === password);
+                    if (!user) return alert('Неверные данные');
+                    setCurrentUser(user);
+                    showSection('home');
+                });
 
-            function renderUsers() {
-                const users = getUsers();
-                usersTable.innerHTML = `
-                    <thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Дата</th><th>Действия</th></tr></thead>
-                    <tbody>
-                        ${users.map(u => `
-                            <tr>
-                                <td>${u.id}</td>
-                                <td>${u.name}</td>
-                                <td>${u.email}</td>
-                                <td>${u.registered || ''}</td>
-                                <td><button class="btn btn-danger" onclick="deleteUser(${u.id})">Удалить</button></td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                `;
-            }
+                // Редактирование профиля
+                document.getElementById('edit-profile-btn').addEventListener('click', () => {
+                    const form = document.getElementById('edit-profile-form');
+                    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                    const user = getCurrentUser();
+                    if (user) {
+                        document.getElementById('edit-name').value = user.name || '';
+                        document.getElementById('edit-avatar').value = user.avatar || '';
+                    }
+                });
 
-            function renderOrders() {
-                const orders = getOrders();
-                ordersTable.innerHTML = `
-                    <thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Тип</th><th>Бюджет</th><th>Дата</th><th>Действия</th></tr></thead>
-                    <tbody>
-                        ${orders.map(o => `
-                            <tr>
-                                <td>${o.id}</td>
-                                <td>${o.name}</td>
-                                <td>${o.email}</td>
-                                <td>${o.type}</td>
-                                <td>${o.budget}</td>
-                                <td>${o.date}</td>
-                                <td><button class="btn btn-danger" onclick="deleteOrder(${o.id})">Удалить</button></td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                `;
-            }
+                document.getElementById('save-profile').addEventListener('click', () => {
+                    const user = getCurrentUser();
+                    if (!user) return;
+                    const newName = document.getElementById('edit-name').value.trim();
+                    const newAvatar = document.getElementById('edit-avatar').value.trim();
+                    if (newName) user.name = newName;
+                    if (newAvatar) user.avatar = newAvatar;
+                    const users = getUsers().map(u => u.id === user.id ? user : u);
+                    saveUsers(users);
+                    setCurrentUser(user);
+                    renderProfile();
+                    document.getElementById('edit-profile-form').style.display = 'none';
+                });
 
-            renderUsers();
-            renderOrders();
-        }
-
-        function deleteUser(id) {
-            let users = getUsers();
-            users = users.filter(u => u.id !== id);
-            saveUsers(users);
-            showToast('Пользователь удалён');
-            initAdminPage();
-        }
-
-        function deleteOrder(id) {
-            let orders = getOrders();
-            orders = orders.filter(o => o.id !== id);
-            saveOrders(orders);
-            showToast('Заказ удалён');
-            initAdminPage();
-        }
-
-        // ===============================================
-        // Инициализация при загрузке
-        // ===============================================
-        document.addEventListener('DOMContentLoaded', () => {
-            // Проверяем, был ли сохранён текущий пользователь в сессии (например, через sessionStorage)
-            // Для простоты не сохраняем, но можно добавить.
-            showPage('home');
-        });
-
-        // Экспорт в глобальную область для onclick
-        window.showPage = showPage;
-        window.closeModal = closeModal;
-        window.logout = logout;
-        window.editProfile = editProfile;
-        window.deleteUser = deleteUser;
-        window.deleteOrder = deleteOrder;
+                document.getElementById('logout-btn').addEventListener('click', () => {
+                    setCurrentUser(null);
+                    showSection('home');
+                });
+            });
+        })();
     </script>
 </body>
 </html>
