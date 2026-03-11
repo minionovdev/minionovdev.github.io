@@ -3,35 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио разработчика</title>
+    <title>MinionClient — современный клиент</title>
     <style>
         /* ===== СБРОС ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background: #0a0c0f;
-            color: #e0e0e0;
-            line-height: 1.6;
+            background: #0b0d10;
+            color: #e4e6ed;
+            line-height: 1.5;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* ===== СТИЛИ ===== */
-        .glass {
-            background: rgba(20, 30, 40, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
-
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -40,8 +31,14 @@
 
         /* ===== ШАПКА ===== */
         header {
-            padding: 20px 0;
-            margin-bottom: 40px;
+            background: rgba(10, 15, 20, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
         }
 
         .header-inner {
@@ -53,11 +50,12 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #a0e0ff, #6c8cff);
+            background: linear-gradient(135deg, #a0f0ff, #6c8cff, #b87aff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(100, 200, 255, 0.5);
         }
 
         nav ul {
@@ -68,131 +66,258 @@
         }
 
         nav a {
-            color: #ccc;
+            color: #b0c0d0;
             text-decoration: none;
             font-weight: 500;
             padding: 8px 16px;
             border-radius: 40px;
             transition: 0.3s;
-            background: rgba(255,255,255,0.05);
+            background: rgba(20, 30, 45, 0.6);
             border: 1px solid transparent;
         }
 
         nav a:hover,
         nav a.active {
-            background: rgba(100, 150, 255, 0.2);
-            border-color: #4a80f0;
+            background: rgba(0, 200, 255, 0.1);
+            border-color: #0cf;
             color: white;
+            box-shadow: 0 0 15px #0cf3;
         }
 
         /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
         main {
             flex: 1;
+            padding: 40px 0;
         }
 
         section {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeGlow 0.5s ease-out;
         }
 
         section.active-section {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeGlow {
+            0% { opacity: 0; filter: brightness(0.5); transform: translateY(10px); }
+            100% { opacity: 1; filter: brightness(1); transform: translateY(0); }
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff, #aac8ff);
+            background: linear-gradient(135deg, #fff, #aaddff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 30px;
             color: #fff;
+            text-shadow: 0 0 15px #0cf7;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 28px;
-            background: linear-gradient(135deg, #2a4c7c, #1a2f4f);
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #0a1a2a, #0a2a3a);
             color: white;
-            border: none;
-            border-radius: 40px;
+            border: 1px solid #0cf;
+            border-radius: 50px;
             font-weight: 600;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: 0.3s;
             text-decoration: none;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 4px 15px rgba(0,40,100,0.5);
+            box-shadow: 0 0 20px #0cf5, inset 0 1px 3px rgba(255,255,255,0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,80,160,0.6);
-            background: linear-gradient(135deg, #2f5a94, #1f3a60);
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px #0cf, inset 0 1px 5px white;
+            background: linear-gradient(135deg, #0f2a3f, #0f3a4f);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid #4a80f0;
-            color: #4a80f0;
-            box-shadow: none;
+            border: 1px solid #0cf;
+            color: #0cf;
+            box-shadow: 0 0 10px #0cf5;
         }
 
         .btn-outline:hover {
-            background: #4a80f0;
+            background: #0cf2;
             color: white;
         }
 
-        /* ===== КАРТОЧКИ ===== */
-        .cards-grid {
+        /* ===== КАРТОЧКИ ПРЕИМУЩЕСТВ ===== */
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 30px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
-        .card {
-            background: rgba(30, 40, 55, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 24px;
+        .feature-card {
+            background: rgba(20, 30, 45, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            border-radius: 32px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 200, 255, 0.2);
             transition: 0.4s;
-            cursor: pointer;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: #4a80f0;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        .feature-card:hover {
+            border-color: #0cf;
+            box-shadow: 0 0 40px #0cf5;
+            transform: scale(1.02);
         }
 
-        .card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px cyan);
         }
 
-        .card p {
-            color: #a0a0b0;
-            margin-bottom: 20px;
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: rgba(74, 128, 240, 0.2);
+        /* ===== ТАРИФЫ ===== */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .plan-card {
+            background: rgba(15, 25, 40, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 200, 255, 0.5);
             border-radius: 40px;
-            font-size: 0.8rem;
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.4s;
+            box-shadow: 0 0 25px rgba(0, 200, 255, 0.3);
+        }
+
+        .plan-card:hover {
+            border-color: #0cf;
+            box-shadow: 0 0 50px #0cf;
+            transform: translateY(-8px);
+        }
+
+        .plan-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #0cf;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #fff;
+        }
+
+        .plan-price small {
+            font-size: 1rem;
+            color: #a0b0c0;
+        }
+
+        /* ===== ПРОФИЛЬ ===== */
+        .profile-info {
+            background: rgba(20, 30, 45, 0.8);
+            border-radius: 40px;
+            padding: 30px;
+            border: 1px solid #0cf3;
+            box-shadow: 0 0 30px #0cf5;
+        }
+
+        .profile-row {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #2a3a50;
+            font-size: 1.2rem;
+        }
+
+        .profile-label {
+            width: 150px;
             color: #aac8ff;
-            margin-bottom: 16px;
+        }
+
+        .profile-value {
+            flex: 1;
+            color: white;
+            font-weight: 500;
+        }
+
+        .status-active {
+            color: #4caf50;
+            text-shadow: 0 0 8px #4caf50;
+        }
+
+        .status-inactive {
+            color: #f44336;
+        }
+
+        /* ===== АДМИНКА ===== */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(10, 20, 30, 0.8);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #2a3f5a;
+        }
+
+        .admin-table th {
+            background: #0a1a2a;
+            color: #0cf;
+        }
+
+        .admin-table tr:hover {
+            background: #1a2a3a;
+        }
+
+        .delete-user {
+            background: #d32f2f;
+            border: none;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #f443;
+        }
+
+        /* ===== СКАЧАТЬ ===== */
+        .download-block {
+            text-align: center;
+            background: rgba(20, 30, 45, 0.6);
+            border-radius: 60px;
+            padding: 50px;
+            border: 1px solid #0cf5;
+        }
+
+        .big-download {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #0cf, #09f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
         }
 
         /* ===== ФОРМЫ ===== */
@@ -203,74 +328,30 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #b0c0d0;
+            color: #b0e0ff;
         }
 
-        input, textarea, select {
+        input {
             width: 100%;
-            padding: 12px 18px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #2a3a50;
-            border-radius: 16px;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #2a4f6f;
+            border-radius: 50px;
             color: white;
             font-size: 1rem;
             transition: 0.3s;
         }
 
-        input:focus, textarea:focus, select:focus {
+        input:focus {
             outline: none;
-            border-color: #4a80f0;
-            box-shadow: 0 0 0 3px rgba(74,128,240,0.3);
+            border-color: #0cf;
+            box-shadow: 0 0 20px #0cf7;
         }
 
-        /* ===== ПРОФИЛЬ ===== */
-        .profile-header {
+        .auth-tabs {
             display: flex;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #2a4c7c, #1a2f4f);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            border: 3px solid #4a80f0;
-        }
-
-        .orders-list {
-            list-style: none;
-        }
-
-        .order-item {
-            background: rgba(40, 50, 70, 0.6);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #4a80f0;
-        }
-
-        /* ===== АДМИНКА ===== */
-        .admin-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .delete-order {
-            background: #d32f2f;
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            cursor: pointer;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
         /* ===== ПОДВАЛ ===== */
@@ -278,21 +359,15 @@
             margin-top: 60px;
             padding: 30px 0;
             text-align: center;
-            color: #7f8fa0;
+            color: #5f7f9f;
+            border-top: 1px solid #1f2f3f;
         }
 
         /* ===== АДАПТАЦИЯ ===== */
         @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            nav ul {
-                justify-content: center;
-            }
-            h1 {
-                font-size: 2rem;
-            }
+            h1 { font-size: 2.5rem; }
+            .header-inner { flex-direction: column; align-items: start; }
+            nav ul { justify-content: center; }
         }
     </style>
 </head>
@@ -300,15 +375,16 @@
     <header>
         <div class="container">
             <div class="header-inner">
-                <div class="logo">DEV PORTFOLIO</div>
+                <div class="logo">MinionClient</div>
                 <nav>
                     <ul>
                         <li><a href="#" data-section="home">Главная</a></li>
-                        <li><a href="#" data-section="works">Мои работы</a></li>
-                        <li><a href="#" data-section="order">Заказать</a></li>
+                        <li><a href="#" data-section="features">Описание</a></li>
+                        <li><a href="#" data-section="download">Скачать</a></li>
+                        <li><a href="#" data-section="plans">Купить</a></li>
                         <li><a href="#" data-section="profile">Профиль</a></li>
                         <li><a href="#" data-section="admin">Админ</a></li>
-                        <li><a href="#" data-section="auth">Вход</a></li>
+                        <li><a href="#" data-section="auth">Войти</a></li>
                     </ul>
                 </nav>
             </div>
@@ -318,139 +394,92 @@
     <main class="container">
         <!-- Главная -->
         <section id="home" class="active-section">
-            <div class="glass" style="padding: 60px; text-align: center;">
-                <h1>Привет, я разработчик<br>создаю сайты, ботов, приложения</h1>
-                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
-                    Современные веб-решения с использованием React, Node.js, Python. 
-                    Более 3 лет опыта, более 20 успешных проектов.
+            <div style="text-align: center; padding: 40px 0;">
+                <h1>MinionClient</h1>
+                <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto 40px; color: #b0d0ff;">
+                    Быстрый, безопасный и удобный клиент для ежедневных задач.
                 </p>
                 <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn" data-section="works">Мои проекты</button>
-                    <button class="btn btn-outline" data-section="order">Заказать разработку</button>
-                    <button class="btn btn-outline" data-section="profile">Контакты</button>
+                    <button class="btn" data-section="download">Скачать клиент</button>
+                    <button class="btn btn-outline" data-section="plans">Купить доступ</button>
+                    <button class="btn btn-outline" data-section="auth">Войти / Регистрация</button>
                 </div>
             </div>
         </section>
 
-        <!-- Мои работы (каталог проектов) -->
-        <section id="works">
-            <h2>Мои работы</h2>
-            <div class="cards-grid" id="projects-list">
-                <!-- JS заполнит карточками -->
+        <!-- Описание клиента (преимущества) -->
+        <section id="features">
+            <h2>Почему MinionClient?</h2>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-icon">⚡</div><h3>Производительность</h3><p>Минимальное потребление ресурсов, максимальная скорость.</p></div>
+                <div class="feature-card"><div class="feature-icon">🎨</div><h3>Удобный интерфейс</h3><p>Интуитивно понятный и настраиваемый дизайн.</p></div>
+                <div class="feature-card"><div class="feature-icon">🔄</div><h3>Регулярные обновления</h3><p>Мы постоянно улучшаем продукт.</p></div>
+                <div class="feature-card"><div class="feature-icon">🔒</div><h3>Безопасность</h3><p>Шифрование и защита данных.</p></div>
+            </div>
+            <div style="margin-top: 40px;">
+                <h3>Основные функции</h3>
+                <ul style="columns: 2; list-style: none; background: rgba(20,30,45,0.6); border-radius: 40px; padding: 30px;">
+                    <li>✓ Поддержка всех платформ</li>
+                    <li>✓ Встроенный магазин</li>
+                    <li>✓ Мгновенные уведомления</li>
+                    <li>✓ Облачные сохранения</li>
+                    <li>✓ Моддинг</li>
+                    <li>✓ И многое другое</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Детальная страница проекта (открывается из карточки) -->
-        <section id="project-detail">
-            <button class="btn btn-outline" id="back-to-works" style="margin-bottom: 20px;">← Назад к работам</button>
-            <div class="glass" style="padding: 40px;" id="project-detail-content">
-                <!-- JS вставит данные -->
+        <!-- Раздел Скачать -->
+        <section id="download">
+            <div class="download-block">
+                <h2>Скачать MinionClient</h2>
+                <div class="big-download">DOWNLOAD</div>
+                <button class="btn" style="font-size: 1.5rem; padding: 20px 60px;">СКАЧАТЬ</button>
+                <p style="margin: 30px 0; color: #9fb0d0;">Версия 2.5.3 (стабильная) | Размер: 85 МБ</p>
+                <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                    <div><strong>Системные требования:</strong><br>Windows 10/11, 4GB RAM, 500MB свободно</div>
+                    <div><strong>Инструкция:</strong><br>Скачайте, запустите, следуйте шагам установки</div>
+                </div>
             </div>
         </section>
 
-        <!-- Заказать разработку -->
-        <section id="order">
-            <h2>Заказать разработку</h2>
-            <div class="glass" style="padding: 40px;">
-                <form id="order-form">
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" id="order-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="order-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Тип проекта</label>
-                        <select id="order-type">
-                            <option value="site">Сайт</option>
-                            <option value="bot">Бот</option>
-                            <option value="app">Приложение</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Описание</label>
-                        <textarea id="order-desc" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Отправить заказ</button>
-                </form>
-            </div>
+        <!-- Тарифы (покупка) -->
+        <section id="plans">
+            <h2>Выбери доступ</h2>
+            <div class="plans-grid" id="plans-container"></div>
         </section>
 
         <!-- Профиль пользователя -->
         <section id="profile">
             <h2>Профиль</h2>
-            <div class="glass" style="padding: 40px;">
-                <div class="profile-header">
-                    <div class="avatar" id="profile-avatar">👤</div>
-                    <div style="flex:1">
-                        <h3 id="profile-name">Имя пользователя</h3>
-                        <button class="btn btn-outline" id="edit-profile-btn">Редактировать</button>
-                        <button class="btn btn-outline" id="logout-btn">Выйти</button>
-                    </div>
-                </div>
-                <div id="edit-profile-form" style="display: none; margin-top: 30px;">
-                    <h3>Редактировать профиль</h3>
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" id="edit-name">
-                    </div>
-                    <div class="form-group">
-                        <label>Аватар (URL или эмодзи)</label>
-                        <input type="text" id="edit-avatar" placeholder="Например: 👨‍💻">
-                    </div>
-                    <button class="btn" id="save-profile">Сохранить</button>
-                </div>
-                <div style="margin-top: 40px;">
-                    <h3>Мои заказы</h3>
-                    <div id="profile-orders"></div>
-                </div>
-            </div>
+            <div class="profile-info" id="profile-content"></div>
+            <button class="btn btn-outline" id="logout-btn" style="margin-top: 20px;">Выйти</button>
         </section>
 
         <!-- Админ панель -->
         <section id="admin">
             <h2>Админ панель</h2>
-            <div class="glass" style="padding: 40px;">
-                <h3>Все заказы</h3>
-                <div id="admin-orders"></div>
-            </div>
+            <div class="profile-info" id="admin-content"></div>
         </section>
 
-        <!-- Авторизация / Регистрация -->
+        <!-- Вход / Регистрация -->
         <section id="auth">
-            <h2>Вход / Регистрация</h2>
-            <div class="glass" style="padding: 40px; max-width: 500px; margin: 0 auto;">
-                <div style="display: flex; gap: 10px; margin-bottom: 30px;">
+            <h2>Авторизация</h2>
+            <div style="max-width: 500px; margin: 0 auto;">
+                <div class="auth-tabs">
                     <button class="btn" id="show-login">Вход</button>
-                    <button class="btn btn-outline" id="show-register">Регистрация</button>
+                    <button class="btn btn-outline" id="show-reg">Регистрация</button>
                 </div>
-                <div id="login-form">
-                    <div class="form-group">
-                        <label>Логин</label>
-                        <input type="text" id="login-username">
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль</label>
-                        <input type="password" id="login-password">
-                    </div>
+                <div id="login-panel">
+                    <div class="form-group"><label>Логин</label><input type="text" id="login-login"></div>
+                    <div class="form-group"><label>Пароль</label><input type="password" id="login-pass"></div>
                     <button class="btn" id="login-btn">Войти</button>
                 </div>
-                <div id="register-form" style="display: none;">
-                    <div class="form-group">
-                        <label>Логин</label>
-                        <input type="text" id="reg-username">
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль</label>
-                        <input type="password" id="reg-password">
-                    </div>
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" id="reg-name">
-                    </div>
-                    <button class="btn" id="register-btn">Зарегистрироваться</button>
+                <div id="reg-panel" style="display: none;">
+                    <div class="form-group"><label>Логин</label><input type="text" id="reg-login"></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="reg-email"></div>
+                    <div class="form-group"><label>Пароль</label><input type="password" id="reg-pass"></div>
+                    <button class="btn" id="reg-btn">Зарегистрироваться</button>
                 </div>
             </div>
         </section>
@@ -458,87 +487,41 @@
 
     <footer>
         <div class="container">
-            <p>© 2025 Dev Portfolio. Все права защищены.</p>
+            <p>© 2025 MinionClient. Все права защищены. Сияй в темноте.</p>
         </div>
     </footer>
 
     <script>
         (function() {
             // ==================== ДАННЫЕ ====================
-            // Статические проекты для портфолио
-            const projectsData = [
-                { id: 1, title: 'Интернет-магазин', type: 'сайт', description: 'Полноценный интернет-магазин на React + Node.js', image: '🛒', details: 'Разработан современный интернет-магазин с корзиной, фильтрами и админ-панелью.' },
-                { id: 2, title: 'Telegram бот для заказа еды', type: 'бот', description: 'Бот на Python с интеграцией платежей', image: '🤖', details: 'Бот позволяет выбирать блюда, оформлять заказы и оплачивать картой.' },
-                { id: 3, title: 'Мобильное приложение для заметок', type: 'приложение', description: 'React Native, синхронизация с облаком', image: '📱', details: 'Кроссплатформенное приложение для iOS и Android с авторизацией.' },
-                { id: 4, title: 'Корпоративный сайт компании', type: 'сайт', description: 'Лендинг с анимациями и формой обратной связи', image: '🏢', details: 'Одностраничный сайт с параллаксом и оптимизацией SEO.' },
-            ];
+            const STORAGE_USERS = 'minion_users';
+            const STORAGE_CURRENT = 'minion_current';
 
-            // Ключи localStorage
-            const STORAGE_USERS = 'portfolio_users';
-            const STORAGE_CURRENT_USER = 'portfolio_current_user';
-            const STORAGE_ORDERS = 'portfolio_orders';
-
-            // Инициализация хранилищ
+            // Инициализация: создаём админа, если нет
             if (!localStorage.getItem(STORAGE_USERS)) {
-                localStorage.setItem(STORAGE_USERS, JSON.stringify([]));
-            }
-            if (!localStorage.getItem(STORAGE_ORDERS)) {
-                localStorage.setItem(STORAGE_ORDERS, JSON.stringify([]));
+                const initialUsers = [
+                    {
+                        uid: 'ADMIN-001',
+                        login: 'admin',
+                        password: 'admin',
+                        email: 'admin@minion.local',
+                        regDate: new Date().toISOString(),
+                        subscription: { active: true, expiry: 'forever' } // вечная
+                    }
+                ];
+                localStorage.setItem(STORAGE_USERS, JSON.stringify(initialUsers));
             }
 
-            // ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
+            // ==================== ВСПОМОГАТЕЛЬНЫЕ ====================
             function showSection(sectionId) {
                 document.querySelectorAll('main section').forEach(s => s.classList.remove('active-section'));
                 document.getElementById(sectionId).classList.add('active-section');
                 // подсветка меню
                 document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-                document.querySelector(`nav a[data-section="${sectionId}"]`)?.classList.add('active');
+                const activeLink = document.querySelector(`nav a[data-section="${sectionId}"]`);
+                if (activeLink) activeLink.classList.add('active');
             }
 
-            // Обновление интерфейса в зависимости от авторизации
-            function updateAuthUI() {
-                const currentUser = getCurrentUser();
-                const profileSection = document.getElementById('profile');
-                const authSection = document.getElementById('auth');
-                const adminLink = document.querySelector('nav a[data-section="admin"]');
-                const profileLink = document.querySelector('nav a[data-section="profile"]');
-                const authLink = document.querySelector('nav a[data-section="auth"]');
-
-                if (currentUser) {
-                    // Пользователь залогинен
-                    profileLink.style.display = 'inline-block';
-                    authLink.textContent = 'Выйти';
-                    authLink.dataset.section = 'logout'; // обработаем отдельно
-                    if (currentUser.username === 'admin') { // простой флаг админа
-                        adminLink.style.display = 'inline-block';
-                    } else {
-                        adminLink.style.display = 'none';
-                    }
-                    // Загрузить данные в профиль
-                    renderProfile();
-                } else {
-                    profileLink.style.display = 'none';
-                    adminLink.style.display = 'none';
-                    authLink.textContent = 'Вход';
-                    authLink.dataset.section = 'auth';
-                }
-            }
-
-            function getCurrentUser() {
-                const data = localStorage.getItem(STORAGE_CURRENT_USER);
-                return data ? JSON.parse(data) : null;
-            }
-
-            function setCurrentUser(user) {
-                if (user) {
-                    localStorage.setItem(STORAGE_CURRENT_USER, JSON.stringify(user));
-                } else {
-                    localStorage.removeItem(STORAGE_CURRENT_USER);
-                }
-                updateAuthUI();
-            }
-
-            // Получить всех пользователей
             function getUsers() {
                 return JSON.parse(localStorage.getItem(STORAGE_USERS)) || [];
             }
@@ -547,226 +530,274 @@
                 localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
             }
 
-            // Заказы
-            function getOrders() {
-                return JSON.parse(localStorage.getItem(STORAGE_ORDERS)) || [];
+            function getCurrentUser() {
+                const login = localStorage.getItem(STORAGE_CURRENT);
+                if (!login) return null;
+                return getUsers().find(u => u.login === login) || null;
             }
 
-            function saveOrders(orders) {
-                localStorage.setItem(STORAGE_ORDERS, JSON.stringify(orders));
+            function setCurrentUser(login) {
+                if (login) localStorage.setItem(STORAGE_CURRENT, login);
+                else localStorage.removeItem(STORAGE_CURRENT);
+                updateUI();
             }
 
-            // Добавить заказ
-            function addOrder(order) {
-                const orders = getOrders();
-                const newOrder = {
-                    id: Date.now(),
-                    ...order,
-                    userId: getCurrentUser()?.id || null,
-                    date: new Date().toLocaleString()
-                };
-                orders.push(newOrder);
-                saveOrders(orders);
+            // Обновление интерфейса после входа/выхода
+            function updateUI() {
+                const user = getCurrentUser();
+                const profileLink = document.querySelector('nav a[data-section="profile"]');
+                const authLink = document.querySelector('nav a[data-section="auth"]');
+                const adminLink = document.querySelector('nav a[data-section="admin"]');
+
+                if (user) {
+                    profileLink.style.display = 'inline-block';
+                    authLink.textContent = 'Выйти';
+                    authLink.dataset.section = 'logout'; // обработаем в клике
+                    if (user.login === 'admin') {
+                        adminLink.style.display = 'inline-block';
+                    } else {
+                        adminLink.style.display = 'none';
+                    }
+                } else {
+                    profileLink.style.display = 'none';
+                    adminLink.style.display = 'none';
+                    authLink.textContent = 'Войти';
+                    authLink.dataset.section = 'auth';
+                }
+                // Обновить содержимое профиля и админки, если они открыты
+                if (user) renderProfile();
+                if (user && user.login === 'admin') renderAdmin();
             }
 
-            // ==================== РЕНДЕР КАРТОЧЕК ПРОЕКТОВ ====================
-            function renderProjects() {
-                const container = document.getElementById('projects-list');
-                container.innerHTML = '';
-                projectsData.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <div class="badge">${p.type}</div>
-                        <h3>${p.title}</h3>
-                        <p>${p.description}</p>
-                        <button class="btn btn-outline" data-project-id="${p.id}">Открыть</button>
-                    `;
-                    card.querySelector('button').addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        showProjectDetail(p.id);
+            // Генерация уникального UID
+            function generateUID(login) {
+                return 'MC-' + login.toUpperCase() + '-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+            }
+
+            // ==================== ТАРИФЫ ====================
+            const plans = [
+                { name: '1 день', days: 1, price: '50₽' },
+                { name: '30 дней', days: 30, price: '300₽' },
+                { name: '1 год', days: 365, price: '1200₽' },
+                { name: 'Навсегда', days: Infinity, price: '5000₽' }
+            ];
+
+            function renderPlans() {
+                const container = document.getElementById('plans-container');
+                container.innerHTML = plans.map(p => `
+                    <div class="plan-card">
+                        <h3>${p.name}</h3>
+                        <div class="plan-price">${p.price}</div>
+                        <button class="btn btn-outline buy-plan" data-days="${p.days}" data-name="${p.name}">Купить</button>
+                    </div>
+                `).join('');
+                // Обработчики покупки
+                document.querySelectorAll('.buy-plan').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const days = e.target.dataset.days;
+                        const planName = e.target.dataset.name;
+                        buyPlan(days, planName);
                     });
-                    container.appendChild(card);
                 });
             }
 
-            function showProjectDetail(projectId) {
-                const project = projectsData.find(p => p.id == projectId);
-                if (!project) return;
-                const detailDiv = document.getElementById('project-detail-content');
-                detailDiv.innerHTML = `
-                    <h2>${project.title}</h2>
-                    <div class="badge">${project.type}</div>
-                    <p style="font-size: 3rem;">${project.image}</p>
-                    <p>${project.details}</p>
-                    <p><strong>Стек:</strong> React, Node.js, MongoDB (пример)</p>
-                    <button class="btn" style="margin-top:20px;" onclick="alert('Ссылка на проект (демо)')">Перейти на сайт</button>
-                `;
-                showSection('project-detail');
+            function buyPlan(days, planName) {
+                const user = getCurrentUser();
+                if (!user) {
+                    alert('Сначала войдите в систему!');
+                    showSection('auth');
+                    return;
+                }
+                // Расчёт даты окончания
+                let expiryDate;
+                if (days === 'Infinity') {
+                    expiryDate = 'forever';
+                } else {
+                    const d = new Date();
+                    d.setDate(d.getDate() + parseInt(days));
+                    expiryDate = d.toISOString();
+                }
+                user.subscription = { active: true, expiry: expiryDate };
+                // Обновляем пользователя в хранилище
+                const users = getUsers().map(u => u.login === user.login ? user : u);
+                saveUsers(users);
+                setCurrentUser(user.login); // обновит UI
+                alert(`Подписка "${planName}" активирована!`);
+                showSection('profile');
             }
 
             // ==================== ПРОФИЛЬ ====================
             function renderProfile() {
                 const user = getCurrentUser();
                 if (!user) return;
-                document.getElementById('profile-name').innerText = user.name || user.username;
-                document.getElementById('profile-avatar').innerText = user.avatar || '👤';
-                // Заказы пользователя
-                const orders = getOrders().filter(o => o.userId === user.id);
-                const ordersDiv = document.getElementById('profile-orders');
-                if (orders.length === 0) {
-                    ordersDiv.innerHTML = '<p>У вас пока нет заказов.</p>';
-                } else {
-                    ordersDiv.innerHTML = orders.map(o => `
-                        <div class="order-item">
-                            <strong>${o.type === 'site' ? 'Сайт' : o.type === 'bot' ? 'Бот' : 'Приложение'}</strong>
-                            <p>${o.description}</p>
-                            <small>${o.date}</small>
-                        </div>
-                    `).join('');
+                const sub = user.subscription || { active: false };
+                let subStatus = '<span class="status-inactive">Неактивна</span>';
+                let expiryText = '—';
+                if (sub.active) {
+                    if (sub.expiry === 'forever') {
+                        subStatus = '<span class="status-active">Активна (навсегда)</span>';
+                        expiryText = 'навсегда';
+                    } else {
+                        const expiry = new Date(sub.expiry);
+                        if (expiry > new Date()) {
+                            subStatus = '<span class="status-active">Активна</span>';
+                            expiryText = expiry.toLocaleDateString();
+                        } else {
+                            subStatus = '<span class="status-inactive">Истекла</span>';
+                            expiryText = expiry.toLocaleDateString() + ' (истекла)';
+                            // можно деактивировать
+                        }
+                    }
                 }
+                document.getElementById('profile-content').innerHTML = `
+                    <div class="profile-row"><span class="profile-label">Ник</span><span class="profile-value">${user.login}</span></div>
+                    <div class="profile-row"><span class="profile-label">UID</span><span class="profile-value">${user.uid || '—'}</span></div>
+                    <div class="profile-row"><span class="profile-label">Email</span><span class="profile-value">${user.email}</span></div>
+                    <div class="profile-row"><span class="profile-label">Дата рег.</span><span class="profile-value">${new Date(user.regDate).toLocaleDateString()}</span></div>
+                    <div class="profile-row"><span class="profile-label">Подписка</span><span class="profile-value">${subStatus}</span></div>
+                    <div class="profile-row"><span class="profile-label">Окончание</span><span class="profile-value">${expiryText}</span></div>
+                `;
             }
 
-            // ==================== АДМИНКА ====================
-            function renderAdminOrders() {
-                const orders = getOrders();
-                const container = document.getElementById('admin-orders');
-                if (orders.length === 0) {
-                    container.innerHTML = '<p>Нет заказов.</p>';
+            // ==================== АДМИН ====================
+            function renderAdmin() {
+                const users = getUsers();
+                const container = document.getElementById('admin-content');
+                if (users.length === 0) {
+                    container.innerHTML = '<p>Нет пользователей</p>';
                     return;
                 }
-                container.innerHTML = orders.map(o => `
-                    <div class="order-item">
-                        <p><strong>${o.name}</strong> (${o.email})</p>
-                        <p>Тип: ${o.type === 'site' ? 'Сайт' : o.type === 'bot' ? 'Бот' : 'Приложение'}</p>
-                        <p>Описание: ${o.description}</p>
-                        <p>Дата: ${o.date}</p>
-                        <div class="admin-actions">
-                            <button class="delete-order" data-id="${o.id}">Удалить</button>
-                        </div>
-                    </div>
-                `).join('');
-                document.querySelectorAll('.delete-order').forEach(btn => {
+                let html = '<table class="admin-table"><tr><th>Логин</th><th>UID</th><th>Подписка</th><th>Действие</th></tr>';
+                users.forEach(u => {
+                    let subStatus = 'Нет';
+                    if (u.subscription?.active) {
+                        subStatus = u.subscription.expiry === 'forever' ? 'Навсегда' : new Date(u.subscription.expiry).toLocaleDateString();
+                    }
+                    html += `<tr>
+                        <td>${u.login}</td>
+                        <td>${u.uid || '—'}</td>
+                        <td>${subStatus}</td>
+                        <td><button class="delete-user" data-login="${u.login}">Удалить</button></td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+                document.querySelectorAll('.delete-user').forEach(btn => {
                     btn.addEventListener('click', (e) => {
-                        const id = Number(e.target.dataset.id);
-                        deleteOrder(id);
+                        const login = e.target.dataset.login;
+                        deleteUser(login);
                     });
                 });
             }
 
-            function deleteOrder(id) {
-                let orders = getOrders().filter(o => o.id !== id);
-                saveOrders(orders);
-                renderAdminOrders();
+            function deleteUser(login) {
+                if (login === 'admin') {
+                    alert('Нельзя удалить админа!');
+                    return;
+                }
+                let users = getUsers().filter(u => u.login !== login);
+                saveUsers(users);
+                // Если удалён текущий пользователь — разлогинить
+                const current = getCurrentUser();
+                if (current && current.login === login) setCurrentUser(null);
+                renderAdmin();
+                updateUI();
+            }
+
+            // ==================== РЕГИСТРАЦИЯ ====================
+            function register(login, email, pass) {
+                let users = getUsers();
+                if (users.find(u => u.login === login)) {
+                    alert('Логин уже существует');
+                    return false;
+                }
+                const newUser = {
+                    uid: generateUID(login),
+                    login,
+                    password: pass,
+                    email,
+                    regDate: new Date().toISOString(),
+                    subscription: { active: false }
+                };
+                users.push(newUser);
+                saveUsers(users);
+                setCurrentUser(login);
+                return true;
+            }
+
+            function loginUser(login, pass) {
+                const users = getUsers();
+                const user = users.find(u => u.login === login && u.password === pass);
+                if (!user) {
+                    alert('Неверный логин или пароль');
+                    return false;
+                }
+                setCurrentUser(login);
+                return true;
             }
 
             // ==================== ИНИЦИАЛИЗАЦИЯ ====================
             document.addEventListener('DOMContentLoaded', () => {
-                renderProjects();
-                updateAuthUI();
+                renderPlans();
+                updateUI();
 
-                // Навигация по ссылкам
+                // Навигация
                 document.querySelectorAll('nav a[data-section]').forEach(link => {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
                         const section = link.dataset.section;
                         if (section === 'logout') {
-                            // выйти
                             setCurrentUser(null);
                             showSection('home');
                             return;
                         }
                         showSection(section);
-                        if (section === 'admin') renderAdminOrders();
-                        if (section === 'profile') renderProfile();
+                        if (section === 'profile' && getCurrentUser()) renderProfile();
+                        if (section === 'admin' && getCurrentUser()?.login === 'admin') renderAdmin();
                     });
                 });
 
-                // Кнопки на главной
+                // Кнопки с data-section
                 document.querySelectorAll('[data-section]').forEach(btn => {
                     if (btn.tagName === 'BUTTON' && btn.dataset.section) {
                         btn.addEventListener('click', () => showSection(btn.dataset.section));
                     }
                 });
 
-                // Кнопка назад из детального просмотра
-                document.getElementById('back-to-works').addEventListener('click', () => showSection('works'));
-
-                // Форма заказа
-                document.getElementById('order-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('order-name').value;
-                    const email = document.getElementById('order-email').value;
-                    const type = document.getElementById('order-type').value;
-                    const desc = document.getElementById('order-desc').value;
-                    addOrder({ name, email, type, description: desc });
-                    alert('Заказ отправлен!');
-                    e.target.reset();
-                });
-
-                // Переключение между логином и регистрацией
+                // Переключение вкладок auth
                 document.getElementById('show-login').addEventListener('click', () => {
-                    document.getElementById('login-form').style.display = 'block';
-                    document.getElementById('register-form').style.display = 'none';
+                    document.getElementById('login-panel').style.display = 'block';
+                    document.getElementById('reg-panel').style.display = 'none';
                 });
-                document.getElementById('show-register').addEventListener('click', () => {
-                    document.getElementById('login-form').style.display = 'none';
-                    document.getElementById('register-form').style.display = 'block';
-                });
-
-                // Регистрация
-                document.getElementById('register-btn').addEventListener('click', () => {
-                    const username = document.getElementById('reg-username').value.trim();
-                    const password = document.getElementById('reg-password').value.trim();
-                    const name = document.getElementById('reg-name').value.trim() || username;
-                    if (!username || !password) return alert('Заполните поля');
-                    const users = getUsers();
-                    if (users.find(u => u.username === username)) {
-                        return alert('Пользователь уже существует');
-                    }
-                    const newUser = { id: Date.now(), username, password, name, avatar: '👤' };
-                    users.push(newUser);
-                    saveUsers(users);
-                    setCurrentUser(newUser);
-                    showSection('home');
+                document.getElementById('show-reg').addEventListener('click', () => {
+                    document.getElementById('login-panel').style.display = 'none';
+                    document.getElementById('reg-panel').style.display = 'block';
                 });
 
                 // Логин
                 document.getElementById('login-btn').addEventListener('click', () => {
-                    const username = document.getElementById('login-username').value.trim();
-                    const password = document.getElementById('login-password').value.trim();
-                    const users = getUsers();
-                    const user = users.find(u => u.username === username && u.password === password);
-                    if (!user) return alert('Неверные данные');
-                    setCurrentUser(user);
-                    showSection('home');
-                });
-
-                // Редактирование профиля
-                document.getElementById('edit-profile-btn').addEventListener('click', () => {
-                    const form = document.getElementById('edit-profile-form');
-                    form.style.display = form.style.display === 'none' ? 'block' : 'none';
-                    const user = getCurrentUser();
-                    if (user) {
-                        document.getElementById('edit-name').value = user.name || '';
-                        document.getElementById('edit-avatar').value = user.avatar || '';
+                    const login = document.getElementById('login-login').value.trim();
+                    const pass = document.getElementById('login-pass').value.trim();
+                    if (loginUser(login, pass)) {
+                        showSection('profile');
                     }
                 });
 
-                document.getElementById('save-profile').addEventListener('click', () => {
-                    const user = getCurrentUser();
-                    if (!user) return;
-                    const newName = document.getElementById('edit-name').value.trim();
-                    const newAvatar = document.getElementById('edit-avatar').value.trim();
-                    if (newName) user.name = newName;
-                    if (newAvatar) user.avatar = newAvatar;
-                    const users = getUsers().map(u => u.id === user.id ? user : u);
-                    saveUsers(users);
-                    setCurrentUser(user);
-                    renderProfile();
-                    document.getElementById('edit-profile-form').style.display = 'none';
+                // Регистрация
+                document.getElementById('reg-btn').addEventListener('click', () => {
+                    const login = document.getElementById('reg-login').value.trim();
+                    const email = document.getElementById('reg-email').value.trim();
+                    const pass = document.getElementById('reg-pass').value.trim();
+                    if (login && email && pass) {
+                        if (register(login, email, pass)) {
+                            showSection('profile');
+                        }
+                    } else {
+                        alert('Заполните все поля');
+                    }
                 });
 
+                // Выход по кнопке в профиле
                 document.getElementById('logout-btn').addEventListener('click', () => {
                     setCurrentUser(null);
                     showSection('home');
