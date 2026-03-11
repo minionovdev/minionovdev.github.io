@@ -1,778 +1,466 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио разработчика</title>
-    <style>
-        /* ===== СБРОС ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Portfolio</title>
 
-        body {
-            background: #0a0c0f;
-            color: #e0e0e0;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+<style>
 
-        /* ===== СТИЛИ ===== */
-        .glass {
-            background: rgba(20, 30, 40, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+body{
+background:#0f0f14;
+color:white;
+}
 
-        /* ===== ШАПКА ===== */
-        header {
-            padding: 20px 0;
-            margin-bottom: 40px;
-        }
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:#151520;
+position:sticky;
+top:0;
+}
 
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+nav h1{
+color:#4da3ff;
+}
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #a0e0ff, #6c8cff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+nav a{
+color:white;
+margin-left:20px;
+cursor:pointer;
+text-decoration:none;
+}
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+section{
+padding:60px 10%;
+display:none;
+}
 
-        nav a {
-            color: #ccc;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 40px;
-            transition: 0.3s;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid transparent;
-        }
+section.active{
+display:block;
+}
 
-        nav a:hover,
-        nav a.active {
-            background: rgba(100, 150, 255, 0.2);
-            border-color: #4a80f0;
-            color: white;
-        }
+.hero{
+text-align:center;
+padding:120px 20px;
+}
 
-        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
-        main {
-            flex: 1;
-        }
+.hero h2{
+font-size:48px;
+margin-bottom:20px;
+}
 
-        section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
+.hero p{
+opacity:0.8;
+margin-bottom:30px;
+}
 
-        section.active-section {
-            display: block;
-        }
+button{
+padding:10px 20px;
+border:none;
+background:#4da3ff;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff, #aac8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.card{
+background:#1b1b2a;
+padding:20px;
+border-radius:10px;
+transition:0.3s;
+}
 
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #fff;
-        }
+.card:hover{
+transform:translateY(-5px);
+}
 
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: linear-gradient(135deg, #2a4c7c, #1a2f4f);
-            color: white;
-            border: none;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 4px 15px rgba(0,40,100,0.5);
-        }
+input,textarea,select{
+width:100%;
+padding:10px;
+margin-top:10px;
+background:#1b1b2a;
+border:none;
+color:white;
+border-radius:6px;
+}
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,80,160,0.6);
-            background: linear-gradient(135deg, #2f5a94, #1f3a60);
-        }
+form{
+max-width:500px;
+margin:auto;
+}
 
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #4a80f0;
-            color: #4a80f0;
-            box-shadow: none;
-        }
+.profile-box{
+background:#1b1b2a;
+padding:20px;
+border-radius:10px;
+max-width:500px;
+}
 
-        .btn-outline:hover {
-            background: #4a80f0;
-            color: white;
-        }
+.admin{
+max-width:800px;
+margin:auto;
+}
 
-        /* ===== КАРТОЧКИ ===== */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
+.notice{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#4da3ff;
+padding:10px 20px;
+border-radius:6px;
+display:none;
+}
 
-        .card {
-            background: rgba(30, 40, 55, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 24px;
-            transition: 0.4s;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: #4a80f0;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
-        .card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: #a0a0b0;
-            margin-bottom: 20px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: rgba(74, 128, 240, 0.2);
-            border-radius: 40px;
-            font-size: 0.8rem;
-            color: #aac8ff;
-            margin-bottom: 16px;
-        }
-
-        /* ===== ФОРМЫ ===== */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #b0c0d0;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 12px 18px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #2a3a50;
-            border-radius: 16px;
-            color: white;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #4a80f0;
-            box-shadow: 0 0 0 3px rgba(74,128,240,0.3);
-        }
-
-        /* ===== ПРОФИЛЬ ===== */
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #2a4c7c, #1a2f4f);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            border: 3px solid #4a80f0;
-        }
-
-        .orders-list {
-            list-style: none;
-        }
-
-        .order-item {
-            background: rgba(40, 50, 70, 0.6);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #4a80f0;
-        }
-
-        /* ===== АДМИНКА ===== */
-        .admin-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .delete-order {
-            background: #d32f2f;
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            cursor: pointer;
-        }
-
-        /* ===== ПОДВАЛ ===== */
-        footer {
-            margin-top: 60px;
-            padding: 30px 0;
-            text-align: center;
-            color: #7f8fa0;
-        }
-
-        /* ===== АДАПТАЦИЯ ===== */
-        @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            nav ul {
-                justify-content: center;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+</style>
 </head>
+
 <body>
-    <header>
-        <div class="container">
-            <div class="header-inner">
-                <div class="logo">DEV PORTFOLIO</div>
-                <nav>
-                    <ul>
-                        <li><a href="#" data-section="home">Главная</a></li>
-                        <li><a href="#" data-section="works">Мои работы</a></li>
-                        <li><a href="#" data-section="order">Заказать</a></li>
-                        <li><a href="#" data-section="profile">Профиль</a></li>
-                        <li><a href="#" data-section="admin">Админ</a></li>
-                        <li><a href="#" data-section="auth">Вход</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
 
-    <main class="container">
-        <!-- Главная -->
-        <section id="home" class="active-section">
-            <div class="glass" style="padding: 60px; text-align: center;">
-                <h1>Привет, я разработчик<br>создаю сайты, ботов, приложения</h1>
-                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
-                    Современные веб-решения с использованием React, Node.js, Python. 
-                    Более 3 лет опыта, более 20 успешных проектов.
-                </p>
-                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn" data-section="works">Мои проекты</button>
-                    <button class="btn btn-outline" data-section="order">Заказать разработку</button>
-                    <button class="btn btn-outline" data-section="profile">Контакты</button>
-                </div>
-            </div>
-        </section>
+<nav>
 
-        <!-- Мои работы (каталог проектов) -->
-        <section id="works">
-            <h2>Мои работы</h2>
-            <div class="cards-grid" id="projects-list">
-                <!-- JS заполнит карточками -->
-            </div>
-        </section>
+<h1>DevPortfolio</h1>
 
-        <!-- Детальная страница проекта (открывается из карточки) -->
-        <section id="project-detail">
-            <button class="btn btn-outline" id="back-to-works" style="margin-bottom: 20px;">← Назад к работам</button>
-            <div class="glass" style="padding: 40px;" id="project-detail-content">
-                <!-- JS вставит данные -->
-            </div>
-        </section>
+<div>
+<a onclick="showPage('home')">Главная</a>
+<a onclick="showPage('projects')">Проекты</a>
+<a onclick="showPage('order')">Заказать</a>
+<a onclick="showPage('profile')">Профиль</a>
+<a onclick="showPage('login')">Вход</a>
+</div>
 
-        <!-- Заказать разработку -->
-        <section id="order">
-            <h2>Заказать разработку</h2>
-            <div class="glass" style="padding: 40px;">
-                <form id="order-form">
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" id="order-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="order-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Тип проекта</label>
-                        <select id="order-type">
-                            <option value="site">Сайт</option>
-                            <option value="bot">Бот</option>
-                            <option value="app">Приложение</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Описание</label>
-                        <textarea id="order-desc" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Отправить заказ</button>
-                </form>
-            </div>
-        </section>
+</nav>
 
-        <!-- Профиль пользователя -->
-        <section id="profile">
-            <h2>Профиль</h2>
-            <div class="glass" style="padding: 40px;">
-                <div class="profile-header">
-                    <div class="avatar" id="profile-avatar">👤</div>
-                    <div style="flex:1">
-                        <h3 id="profile-name">Имя пользователя</h3>
-                        <button class="btn btn-outline" id="edit-profile-btn">Редактировать</button>
-                        <button class="btn btn-outline" id="logout-btn">Выйти</button>
-                    </div>
-                </div>
-                <div id="edit-profile-form" style="display: none; margin-top: 30px;">
-                    <h3>Редактировать профиль</h3>
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" id="edit-name">
-                    </div>
-                    <div class="form-group">
-                        <label>Аватар (URL или эмодзи)</label>
-                        <input type="text" id="edit-avatar" placeholder="Например: 👨‍💻">
-                    </div>
-                    <button class="btn" id="save-profile">Сохранить</button>
-                </div>
-                <div style="margin-top: 40px;">
-                    <h3>Мои заказы</h3>
-                    <div id="profile-orders"></div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Админ панель -->
-        <section id="admin">
-            <h2>Админ панель</h2>
-            <div class="glass" style="padding: 40px;">
-                <h3>Все заказы</h3>
-                <div id="admin-orders"></div>
-            </div>
-        </section>
+<section id="home" class="active">
 
-        <!-- Авторизация / Регистрация -->
-        <section id="auth">
-            <h2>Вход / Регистрация</h2>
-            <div class="glass" style="padding: 40px; max-width: 500px; margin: 0 auto;">
-                <div style="display: flex; gap: 10px; margin-bottom: 30px;">
-                    <button class="btn" id="show-login">Вход</button>
-                    <button class="btn btn-outline" id="show-register">Регистрация</button>
-                </div>
-                <div id="login-form">
-                    <div class="form-group">
-                        <label>Логин</label>
-                        <input type="text" id="login-username">
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль</label>
-                        <input type="password" id="login-password">
-                    </div>
-                    <button class="btn" id="login-btn">Войти</button>
-                </div>
-                <div id="register-form" style="display: none;">
-                    <div class="form-group">
-                        <label>Логин</label>
-                        <input type="text" id="reg-username">
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль</label>
-                        <input type="password" id="reg-password">
-                    </div>
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" id="reg-name">
-                    </div>
-                    <button class="btn" id="register-btn">Зарегистрироваться</button>
-                </div>
-            </div>
-        </section>
-    </main>
+<div class="hero">
 
-    <footer>
-        <div class="container">
-            <p>© 2025 Dev Portfolio. Все права защищены.</p>
-        </div>
-    </footer>
+<h2>Разработчик сайтов и ботов</h2>
 
-    <script>
-        (function() {
-            // ==================== ДАННЫЕ ====================
-            // Статические проекты для портфолио
-            const projectsData = [
-                { id: 1, title: 'Интернет-магазин', type: 'сайт', description: 'Полноценный интернет-магазин на React + Node.js', image: '🛒', details: 'Разработан современный интернет-магазин с корзиной, фильтрами и админ-панелью.' },
-                { id: 2, title: 'Telegram бот для заказа еды', type: 'бот', description: 'Бот на Python с интеграцией платежей', image: '🤖', details: 'Бот позволяет выбирать блюда, оформлять заказы и оплачивать картой.' },
-                { id: 3, title: 'Мобильное приложение для заметок', type: 'приложение', description: 'React Native, синхронизация с облаком', image: '📱', details: 'Кроссплатформенное приложение для iOS и Android с авторизацией.' },
-                { id: 4, title: 'Корпоративный сайт компании', type: 'сайт', description: 'Лендинг с анимациями и формой обратной связи', image: '🏢', details: 'Одностраничный сайт с параллаксом и оптимизацией SEO.' },
-            ];
+<p>Создаю сайты, Telegram-ботов и веб-приложения.</p>
 
-            // Ключи localStorage
-            const STORAGE_USERS = 'portfolio_users';
-            const STORAGE_CURRENT_USER = 'portfolio_current_user';
-            const STORAGE_ORDERS = 'portfolio_orders';
+<button onclick="showPage('projects')">Мои проекты</button>
 
-            // Инициализация хранилищ
-            if (!localStorage.getItem(STORAGE_USERS)) {
-                localStorage.setItem(STORAGE_USERS, JSON.stringify([]));
-            }
-            if (!localStorage.getItem(STORAGE_ORDERS)) {
-                localStorage.setItem(STORAGE_ORDERS, JSON.stringify([]));
-            }
+</div>
 
-            // ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
-            function showSection(sectionId) {
-                document.querySelectorAll('main section').forEach(s => s.classList.remove('active-section'));
-                document.getElementById(sectionId).classList.add('active-section');
-                // подсветка меню
-                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-                document.querySelector(`nav a[data-section="${sectionId}"]`)?.classList.add('active');
-            }
+</section>
 
-            // Обновление интерфейса в зависимости от авторизации
-            function updateAuthUI() {
-                const currentUser = getCurrentUser();
-                const profileSection = document.getElementById('profile');
-                const authSection = document.getElementById('auth');
-                const adminLink = document.querySelector('nav a[data-section="admin"]');
-                const profileLink = document.querySelector('nav a[data-section="profile"]');
-                const authLink = document.querySelector('nav a[data-section="auth"]');
 
-                if (currentUser) {
-                    // Пользователь залогинен
-                    profileLink.style.display = 'inline-block';
-                    authLink.textContent = 'Выйти';
-                    authLink.dataset.section = 'logout'; // обработаем отдельно
-                    if (currentUser.username === 'admin') { // простой флаг админа
-                        adminLink.style.display = 'inline-block';
-                    } else {
-                        adminLink.style.display = 'none';
-                    }
-                    // Загрузить данные в профиль
-                    renderProfile();
-                } else {
-                    profileLink.style.display = 'none';
-                    adminLink.style.display = 'none';
-                    authLink.textContent = 'Вход';
-                    authLink.dataset.section = 'auth';
-                }
-            }
+<section id="projects">
 
-            function getCurrentUser() {
-                const data = localStorage.getItem(STORAGE_CURRENT_USER);
-                return data ? JSON.parse(data) : null;
-            }
+<h2>Мои проекты</h2>
 
-            function setCurrentUser(user) {
-                if (user) {
-                    localStorage.setItem(STORAGE_CURRENT_USER, JSON.stringify(user));
-                } else {
-                    localStorage.removeItem(STORAGE_CURRENT_USER);
-                }
-                updateAuthUI();
-            }
+<br>
 
-            // Получить всех пользователей
-            function getUsers() {
-                return JSON.parse(localStorage.getItem(STORAGE_USERS)) || [];
-            }
+<input placeholder="Поиск..." oninput="searchProjects(this.value)">
 
-            function saveUsers(users) {
-                localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
-            }
+<br><br>
 
-            // Заказы
-            function getOrders() {
-                return JSON.parse(localStorage.getItem(STORAGE_ORDERS)) || [];
-            }
+<select onchange="filterProjects(this.value)">
+<option value="all">Все</option>
+<option value="site">Сайты</option>
+<option value="bot">Боты</option>
+<option value="app">Приложения</option>
+</select>
 
-            function saveOrders(orders) {
-                localStorage.setItem(STORAGE_ORDERS, JSON.stringify(orders));
-            }
+<br><br>
 
-            // Добавить заказ
-            function addOrder(order) {
-                const orders = getOrders();
-                const newOrder = {
-                    id: Date.now(),
-                    ...order,
-                    userId: getCurrentUser()?.id || null,
-                    date: new Date().toLocaleString()
-                };
-                orders.push(newOrder);
-                saveOrders(orders);
-            }
+<div class="grid" id="projectsGrid"></div>
 
-            // ==================== РЕНДЕР КАРТОЧЕК ПРОЕКТОВ ====================
-            function renderProjects() {
-                const container = document.getElementById('projects-list');
-                container.innerHTML = '';
-                projectsData.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <div class="badge">${p.type}</div>
-                        <h3>${p.title}</h3>
-                        <p>${p.description}</p>
-                        <button class="btn btn-outline" data-project-id="${p.id}">Открыть</button>
-                    `;
-                    card.querySelector('button').addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        showProjectDetail(p.id);
-                    });
-                    container.appendChild(card);
-                });
-            }
+</section>
 
-            function showProjectDetail(projectId) {
-                const project = projectsData.find(p => p.id == projectId);
-                if (!project) return;
-                const detailDiv = document.getElementById('project-detail-content');
-                detailDiv.innerHTML = `
-                    <h2>${project.title}</h2>
-                    <div class="badge">${project.type}</div>
-                    <p style="font-size: 3rem;">${project.image}</p>
-                    <p>${project.details}</p>
-                    <p><strong>Стек:</strong> React, Node.js, MongoDB (пример)</p>
-                    <button class="btn" style="margin-top:20px;" onclick="alert('Ссылка на проект (демо)')">Перейти на сайт</button>
-                `;
-                showSection('project-detail');
-            }
 
-            // ==================== ПРОФИЛЬ ====================
-            function renderProfile() {
-                const user = getCurrentUser();
-                if (!user) return;
-                document.getElementById('profile-name').innerText = user.name || user.username;
-                document.getElementById('profile-avatar').innerText = user.avatar || '👤';
-                // Заказы пользователя
-                const orders = getOrders().filter(o => o.userId === user.id);
-                const ordersDiv = document.getElementById('profile-orders');
-                if (orders.length === 0) {
-                    ordersDiv.innerHTML = '<p>У вас пока нет заказов.</p>';
-                } else {
-                    ordersDiv.innerHTML = orders.map(o => `
-                        <div class="order-item">
-                            <strong>${o.type === 'site' ? 'Сайт' : o.type === 'bot' ? 'Бот' : 'Приложение'}</strong>
-                            <p>${o.description}</p>
-                            <small>${o.date}</small>
-                        </div>
-                    `).join('');
-                }
-            }
+<section id="order">
 
-            // ==================== АДМИНКА ====================
-            function renderAdminOrders() {
-                const orders = getOrders();
-                const container = document.getElementById('admin-orders');
-                if (orders.length === 0) {
-                    container.innerHTML = '<p>Нет заказов.</p>';
-                    return;
-                }
-                container.innerHTML = orders.map(o => `
-                    <div class="order-item">
-                        <p><strong>${o.name}</strong> (${o.email})</p>
-                        <p>Тип: ${o.type === 'site' ? 'Сайт' : o.type === 'bot' ? 'Бот' : 'Приложение'}</p>
-                        <p>Описание: ${o.description}</p>
-                        <p>Дата: ${o.date}</p>
-                        <div class="admin-actions">
-                            <button class="delete-order" data-id="${o.id}">Удалить</button>
-                        </div>
-                    </div>
-                `).join('');
-                document.querySelectorAll('.delete-order').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const id = Number(e.target.dataset.id);
-                        deleteOrder(id);
-                    });
-                });
-            }
+<h2>Заказать разработку</h2>
 
-            function deleteOrder(id) {
-                let orders = getOrders().filter(o => o.id !== id);
-                saveOrders(orders);
-                renderAdminOrders();
-            }
+<br>
 
-            // ==================== ИНИЦИАЛИЗАЦИЯ ====================
-            document.addEventListener('DOMContentLoaded', () => {
-                renderProjects();
-                updateAuthUI();
+<form onsubmit="sendOrder(event)">
 
-                // Навигация по ссылкам
-                document.querySelectorAll('nav a[data-section]').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const section = link.dataset.section;
-                        if (section === 'logout') {
-                            // выйти
-                            setCurrentUser(null);
-                            showSection('home');
-                            return;
-                        }
-                        showSection(section);
-                        if (section === 'admin') renderAdminOrders();
-                        if (section === 'profile') renderProfile();
-                    });
-                });
+<input placeholder="Имя" required>
 
-                // Кнопки на главной
-                document.querySelectorAll('[data-section]').forEach(btn => {
-                    if (btn.tagName === 'BUTTON' && btn.dataset.section) {
-                        btn.addEventListener('click', () => showSection(btn.dataset.section));
-                    }
-                });
+<input placeholder="Email" required>
 
-                // Кнопка назад из детального просмотра
-                document.getElementById('back-to-works').addEventListener('click', () => showSection('works'));
+<select required>
+<option value="">Тип проекта</option>
+<option>Сайт</option>
+<option>Бот</option>
+<option>Приложение</option>
+</select>
 
-                // Форма заказа
-                document.getElementById('order-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('order-name').value;
-                    const email = document.getElementById('order-email').value;
-                    const type = document.getElementById('order-type').value;
-                    const desc = document.getElementById('order-desc').value;
-                    addOrder({ name, email, type, description: desc });
-                    alert('Заказ отправлен!');
-                    e.target.reset();
-                });
+<input placeholder="Бюджет">
 
-                // Переключение между логином и регистрацией
-                document.getElementById('show-login').addEventListener('click', () => {
-                    document.getElementById('login-form').style.display = 'block';
-                    document.getElementById('register-form').style.display = 'none';
-                });
-                document.getElementById('show-register').addEventListener('click', () => {
-                    document.getElementById('login-form').style.display = 'none';
-                    document.getElementById('register-form').style.display = 'block';
-                });
+<textarea placeholder="Описание проекта"></textarea>
 
-                // Регистрация
-                document.getElementById('register-btn').addEventListener('click', () => {
-                    const username = document.getElementById('reg-username').value.trim();
-                    const password = document.getElementById('reg-password').value.trim();
-                    const name = document.getElementById('reg-name').value.trim() || username;
-                    if (!username || !password) return alert('Заполните поля');
-                    const users = getUsers();
-                    if (users.find(u => u.username === username)) {
-                        return alert('Пользователь уже существует');
-                    }
-                    const newUser = { id: Date.now(), username, password, name, avatar: '👤' };
-                    users.push(newUser);
-                    saveUsers(users);
-                    setCurrentUser(newUser);
-                    showSection('home');
-                });
+<br><br>
 
-                // Логин
-                document.getElementById('login-btn').addEventListener('click', () => {
-                    const username = document.getElementById('login-username').value.trim();
-                    const password = document.getElementById('login-password').value.trim();
-                    const users = getUsers();
-                    const user = users.find(u => u.username === username && u.password === password);
-                    if (!user) return alert('Неверные данные');
-                    setCurrentUser(user);
-                    showSection('home');
-                });
+<button>Отправить</button>
 
-                // Редактирование профиля
-                document.getElementById('edit-profile-btn').addEventListener('click', () => {
-                    const form = document.getElementById('edit-profile-form');
-                    form.style.display = form.style.display === 'none' ? 'block' : 'none';
-                    const user = getCurrentUser();
-                    if (user) {
-                        document.getElementById('edit-name').value = user.name || '';
-                        document.getElementById('edit-avatar').value = user.avatar || '';
-                    }
-                });
+</form>
 
-                document.getElementById('save-profile').addEventListener('click', () => {
-                    const user = getCurrentUser();
-                    if (!user) return;
-                    const newName = document.getElementById('edit-name').value.trim();
-                    const newAvatar = document.getElementById('edit-avatar').value.trim();
-                    if (newName) user.name = newName;
-                    if (newAvatar) user.avatar = newAvatar;
-                    const users = getUsers().map(u => u.id === user.id ? user : u);
-                    saveUsers(users);
-                    setCurrentUser(user);
-                    renderProfile();
-                    document.getElementById('edit-profile-form').style.display = 'none';
-                });
+</section>
 
-                document.getElementById('logout-btn').addEventListener('click', () => {
-                    setCurrentUser(null);
-                    showSection('home');
-                });
-            });
-        })();
-    </script>
+
+<section id="login">
+
+<h2>Регистрация</h2>
+
+<br>
+
+<form onsubmit="register(event)">
+
+<input id="regName" placeholder="Имя" required>
+<input id="regEmail" placeholder="Email" required>
+<input id="regPass" type="password" placeholder="Пароль" required>
+
+<br><br>
+
+<button>Зарегистрироваться</button>
+
+</form>
+
+<br><br>
+
+<h2>Вход</h2>
+
+<br>
+
+<form onsubmit="login(event)">
+
+<input id="loginEmail" placeholder="Email">
+<input id="loginPass" type="password" placeholder="Пароль">
+
+<br><br>
+
+<button>Войти</button>
+
+</form>
+
+</section>
+
+
+<section id="profile">
+
+<h2>Профиль</h2>
+
+<br>
+
+<div class="profile-box" id="profileBox"></div>
+
+</section>
+
+
+<section id="admin">
+
+<h2>Админ панель</h2>
+
+<br>
+
+<div class="admin">
+
+<h3>Пользователи</h3>
+<div id="usersList"></div>
+
+<br>
+
+<h3>Заказы</h3>
+<div id="ordersList"></div>
+
+</div>
+
+</section>
+
+
+<div class="notice" id="notice"></div>
+
+
+<script>
+
+function showPage(id){
+
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
+
+document.getElementById(id).classList.add("active")
+
+}
+
+function notify(text){
+
+let n=document.getElementById("notice")
+
+n.innerText=text
+
+n.style.display="block"
+
+setTimeout(()=>n.style.display="none",2000)
+
+}
+
+
+let projects=[
+
+{title:"Telegram Bot",type:"bot",desc:"Автоматический бот"},
+
+{title:"Landing Page",type:"site",desc:"Современный сайт"},
+
+{title:"Web App",type:"app",desc:"Приложение"}
+
+]
+
+function renderProjects(list){
+
+let grid=document.getElementById("projectsGrid")
+
+grid.innerHTML=""
+
+list.forEach(p=>{
+
+grid.innerHTML+=`
+
+<div class="card">
+
+<h3>${p.title}</h3>
+
+<p>${p.desc}</p>
+
+<button onclick="notify('Открытие проекта')">Подробнее</button>
+
+</div>
+
+`
+
+})
+
+}
+
+renderProjects(projects)
+
+function searchProjects(q){
+
+let f=projects.filter(p=>p.title.toLowerCase().includes(q.toLowerCase()))
+
+renderProjects(f)
+
+}
+
+function filterProjects(t){
+
+if(t=="all")renderProjects(projects)
+
+else renderProjects(projects.filter(p=>p.type==t))
+
+}
+
+function register(e){
+
+e.preventDefault()
+
+let user={
+
+name:regName.value,
+
+email:regEmail.value,
+
+pass:regPass.value,
+
+date:new Date().toLocaleDateString()
+
+}
+
+localStorage.setItem("user",JSON.stringify(user))
+
+notify("Регистрация успешна")
+
+}
+
+function login(e){
+
+e.preventDefault()
+
+let user=JSON.parse(localStorage.getItem("user"))
+
+if(user && user.email==loginEmail.value && user.pass==loginPass.value){
+
+localStorage.setItem("logged",true)
+
+notify("Вы вошли")
+
+loadProfile()
+
+}else{
+
+notify("Ошибка входа")
+
+}
+
+}
+
+function loadProfile(){
+
+let user=JSON.parse(localStorage.getItem("user"))
+
+if(!user)return
+
+profileBox.innerHTML=`
+
+<h3>${user.name}</h3>
+
+<p>${user.email}</p>
+
+<p>Дата регистрации: ${user.date}</p>
+
+<button onclick="logout()">Выйти</button>
+
+`
+
+}
+
+function logout(){
+
+localStorage.removeItem("logged")
+
+notify("Вы вышли")
+
+}
+
+function sendOrder(e){
+
+e.preventDefault()
+
+let orders=JSON.parse(localStorage.getItem("orders")||"[]")
+
+orders.push({
+
+date:new Date().toLocaleDateString()
+
+})
+
+localStorage.setItem("orders",JSON.stringify(orders))
+
+notify("Заказ отправлен")
+
+}
+
+loadProfile()
+
+</script>
+
 </body>
 </html>
