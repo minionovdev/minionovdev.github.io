@@ -3,464 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dev Portfolio</title>
-
+<title>Мои Программы</title>
 <style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: #f0f2f5;
+        color: #333;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
-}
+    header {
+        background: linear-gradient(90deg, #4facfe, #00f2fe);
+        padding: 30px;
+        text-align: center;
+        color: white;
+        font-size: 36px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
 
-body{
-background:#0f0f14;
-color:white;
-}
+    .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 0 20px;
+    }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px;
-background:#151520;
-position:sticky;
-top:0;
-}
+    .program-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-nav h1{
-color:#4da3ff;
-}
+    .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
 
-nav a{
-color:white;
-margin-left:20px;
-cursor:pointer;
-text-decoration:none;
-}
+    .program-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
 
-section{
-padding:60px 10%;
-display:none;
-}
+    .program-content {
+        padding: 15px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
-section.active{
-display:block;
-}
+    .program-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
-.hero{
-text-align:center;
-padding:120px 20px;
-}
+    .program-description {
+        font-size: 14px;
+        margin-bottom: 15px;
+        color: #666;
+    }
 
-.hero h2{
-font-size:48px;
-margin-bottom:20px;
-}
+    .btn-download {
+        padding: 12px 20px;
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+        transition: background 0.3s, transform 0.2s;
+        text-decoration: none;
+    }
 
-.hero p{
-opacity:0.8;
-margin-bottom:30px;
-}
+    .btn-download:hover {
+        background: linear-gradient(90deg, #feb47b, #ff7e5f);
+        transform: translateY(-2px);
+    }
 
-button{
-padding:10px 20px;
-border:none;
-background:#4da3ff;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 14px;
+        color: #555;
+        margin-top: 40px;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.card{
-background:#1b1b2a;
-padding:20px;
-border-radius:10px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-}
-
-input,textarea,select{
-width:100%;
-padding:10px;
-margin-top:10px;
-background:#1b1b2a;
-border:none;
-color:white;
-border-radius:6px;
-}
-
-form{
-max-width:500px;
-margin:auto;
-}
-
-.profile-box{
-background:#1b1b2a;
-padding:20px;
-border-radius:10px;
-max-width:500px;
-}
-
-.admin{
-max-width:800px;
-margin:auto;
-}
-
-.notice{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#4da3ff;
-padding:10px 20px;
-border-radius:6px;
-display:none;
-}
-
+    @media(max-width: 600px){
+        header { font-size: 28px; padding: 20px; }
+        .program-card img { height: 120px; }
+    }
 </style>
 </head>
-
 <body>
 
-<nav>
-
-<h1>DevPortfolio</h1>
-
-<div>
-<a onclick="showPage('home')">Главная</a>
-<a onclick="showPage('projects')">Проекты</a>
-<a onclick="showPage('order')">Заказать</a>
-<a onclick="showPage('profile')">Профиль</a>
-<a onclick="showPage('login')">Вход</a>
-</div>
-
-</nav>
-
-
-<section id="home" class="active">
-
-<div class="hero">
-
-<h2>Разработчик сайтов и ботов</h2>
-
-<p>Создаю сайты, Telegram-ботов и веб-приложения.</p>
-
-<button onclick="showPage('projects')">Мои проекты</button>
-
-</div>
-
-</section>
-
-
-<section id="projects">
-
-<h2>Мои проекты</h2>
-
-<br>
-
-<input placeholder="Поиск..." oninput="searchProjects(this.value)">
-
-<br><br>
-
-<select onchange="filterProjects(this.value)">
-<option value="all">Все</option>
-<option value="site">Сайты</option>
-<option value="bot">Боты</option>
-<option value="app">Приложения</option>
-</select>
-
-<br><br>
-
-<div class="grid" id="projectsGrid"></div>
-
-</section>
-
-
-<section id="order">
-
-<h2>Заказать разработку</h2>
-
-<br>
-
-<form onsubmit="sendOrder(event)">
-
-<input placeholder="Имя" required>
-
-<input placeholder="Email" required>
-
-<select required>
-<option value="">Тип проекта</option>
-<option>Сайт</option>
-<option>Бот</option>
-<option>Приложение</option>
-</select>
-
-<input placeholder="Бюджет">
-
-<textarea placeholder="Описание проекта"></textarea>
-
-<br><br>
-
-<button>Отправить</button>
-
-</form>
-
-</section>
-
-
-<section id="login">
-
-<h2>Регистрация</h2>
-
-<br>
-
-<form onsubmit="register(event)">
-
-<input id="regName" placeholder="Имя" required>
-<input id="regEmail" placeholder="Email" required>
-<input id="regPass" type="password" placeholder="Пароль" required>
-
-<br><br>
-
-<button>Зарегистрироваться</button>
-
-</form>
-
-<br><br>
-
-<h2>Вход</h2>
-
-<br>
-
-<form onsubmit="login(event)">
-
-<input id="loginEmail" placeholder="Email">
-<input id="loginPass" type="password" placeholder="Пароль">
-
-<br><br>
-
-<button>Войти</button>
-
-</form>
-
-</section>
-
-
-<section id="profile">
-
-<h2>Профиль</h2>
-
-<br>
-
-<div class="profile-box" id="profileBox"></div>
-
-</section>
-
-
-<section id="admin">
-
-<h2>Админ панель</h2>
-
-<br>
-
-<div class="admin">
-
-<h3>Пользователи</h3>
-<div id="usersList"></div>
-
-<br>
-
-<h3>Заказы</h3>
-<div id="ordersList"></div>
+<header>Мои Программы</header>
+
+<div class="container">
+    <!-- 20 блоков программ -->
+    <!-- Блоки можно копировать и редактировать текст и ссылки -->
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 1">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 1</div>
+                <div class="program-description">Описание вашей первой программы. Здесь вы можете добавить детали.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 2">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 2</div>
+                <div class="program-description">Описание вашей второй программы.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 3">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 3</div>
+                <div class="program-description">Описание вашей третьей программы.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 4">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 4</div>
+                <div class="program-description">Описание программы номер 4.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 5">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 5</div>
+                <div class="program-description">Описание программы номер 5.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 6">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 6</div>
+                <div class="program-description">Описание программы номер 6.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 7">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 7</div>
+                <div class="program-description">Описание программы номер 7.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 8">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 8</div>
+                <div class="program-description">Описание программы номер 8.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 9">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 9</div>
+                <div class="program-description">Описание программы номер 9.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <div class="program-card">
+        <img src="https://via.placeholder.com/400x150" alt="Программа 10">
+        <div class="program-content">
+            <div>
+                <div class="program-title">Программа 10</div>
+                <div class="program-description">Описание программы номер 10.</div>
+            </div>
+            <a href="#" class="btn-download">Скачать</a>
+        </div>
+    </div>
+
+    <!-- Повторяем блоки до 20 -->
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 11"><div class="program-content"><div><div class="program-title">Программа 11</div><div class="program-description">Описание программы 11.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 12"><div class="program-content"><div><div class="program-title">Программа 12</div><div class="program-description">Описание программы 12.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 13"><div class="program-content"><div><div class="program-title">Программа 13</div><div class="program-description">Описание программы 13.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 14"><div class="program-content"><div><div class="program-title">Программа 14</div><div class="program-description">Описание программы 14.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 15"><div class="program-content"><div><div class="program-title">Программа 15</div><div class="program-description">Описание программы 15.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 16"><div class="program-content"><div><div class="program-title">Программа 16</div><div class="program-description">Описание программы 16.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 17"><div class="program-content"><div><div class="program-title">Программа 17</div><div class="program-description">Описание программы 17.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 18"><div class="program-content"><div><div class="program-title">Программа 18</div><div class="program-description">Описание программы 18.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 19"><div class="program-content"><div><div class="program-title">Программа 19</div><div class="program-description">Описание программы 19.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
+    <div class="program-card"><img src="https://via.placeholder.com/400x150" alt="Программа 20"><div class="program-content"><div><div class="program-title">Программа 20</div><div class="program-description">Описание программы 20.</div></div><a href=\"#\" class="btn-download\">Скачать</a></div></div>\n
 
 </div>
 
-</section>
-
-
-<div class="notice" id="notice"></div>
-
-
-<script>
-
-function showPage(id){
-
-document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
-
-document.getElementById(id).classList.add("active")
-
-}
-
-function notify(text){
-
-let n=document.getElementById("notice")
-
-n.innerText=text
-
-n.style.display="block"
-
-setTimeout(()=>n.style.display="none",2000)
-
-}
-
-
-let projects=[
-
-{title:"Telegram Bot",type:"bot",desc:"Автоматический бот"},
-
-{title:"Landing Page",type:"site",desc:"Современный сайт"},
-
-{title:"Web App",type:"app",desc:"Приложение"}
-
-]
-
-function renderProjects(list){
-
-let grid=document.getElementById("projectsGrid")
-
-grid.innerHTML=""
-
-list.forEach(p=>{
-
-grid.innerHTML+=`
-
-<div class="card">
-
-<h3>${p.title}</h3>
-
-<p>${p.desc}</p>
-
-<button onclick="notify('Открытие проекта')">Подробнее</button>
-
-</div>
-
-`
-
-})
-
-}
-
-renderProjects(projects)
-
-function searchProjects(q){
-
-let f=projects.filter(p=>p.title.toLowerCase().includes(q.toLowerCase()))
-
-renderProjects(f)
-
-}
-
-function filterProjects(t){
-
-if(t=="all")renderProjects(projects)
-
-else renderProjects(projects.filter(p=>p.type==t))
-
-}
-
-function register(e){
-
-e.preventDefault()
-
-let user={
-
-name:regName.value,
-
-email:regEmail.value,
-
-pass:regPass.value,
-
-date:new Date().toLocaleDateString()
-
-}
-
-localStorage.setItem("user",JSON.stringify(user))
-
-notify("Регистрация успешна")
-
-}
-
-function login(e){
-
-e.preventDefault()
-
-let user=JSON.parse(localStorage.getItem("user"))
-
-if(user && user.email==loginEmail.value && user.pass==loginPass.value){
-
-localStorage.setItem("logged",true)
-
-notify("Вы вошли")
-
-loadProfile()
-
-}else{
-
-notify("Ошибка входа")
-
-}
-
-}
-
-function loadProfile(){
-
-let user=JSON.parse(localStorage.getItem("user"))
-
-if(!user)return
-
-profileBox.innerHTML=`
-
-<h3>${user.name}</h3>
-
-<p>${user.email}</p>
-
-<p>Дата регистрации: ${user.date}</p>
-
-<button onclick="logout()">Выйти</button>
-
-`
-
-}
-
-function logout(){
-
-localStorage.removeItem("logged")
-
-notify("Вы вышли")
-
-}
-
-function sendOrder(e){
-
-e.preventDefault()
-
-let orders=JSON.parse(localStorage.getItem("orders")||"[]")
-
-orders.push({
-
-date:new Date().toLocaleDateString()
-
-})
-
-localStorage.setItem("orders",JSON.stringify(orders))
-
-notify("Заказ отправлен")
-
-}
-
-loadProfile()
-
-</script>
+<footer>&copy; 2026 Мои Программы. Все права защищены.</footer>
 
 </body>
 </html>
