@@ -1,306 +1,383 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Мои Программы</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>СММ-менеджер — резюме и услуги</title>
+  <meta name="description" content="Личный сайт резюме и услуг SMM-менеджера: Telegram, Max, контент, посты, продвижение и недорогие услуги под запрос." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --text: #f4f7fb;
+      --muted: #b8c2d6;
+      --accent: #7c9cff;
+      --accent-2: #6ee7b7;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+      --radius: 24px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-        margin:0;
-        font-family:'Arial',sans-serif;
-        background:#f0f2f5;
-        color:#333;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 156, 255, 0.28), transparent 30%),
+        radial-gradient(circle at top right, rgba(110, 231, 183, 0.18), transparent 24%),
+        linear-gradient(180deg, #0b1020 0%, #0e1630 100%);
+      color: var(--text);
+      line-height: 1.6;
     }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+
     header {
-        background: linear-gradient(90deg,#4facfe,#00f2fe);
-        padding:30px;
-        text-align:center;
-        color:white;
-        font-size:36px;
-        font-weight:bold;
-        box-shadow:0 5px 15px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(11, 16, 32, 0.62);
+      border-bottom: 1px solid var(--border);
     }
-    .container {
-        max-width:1200px;
-        margin:40px auto;
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-        gap:20px;
-        padding:0 20px;
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
     }
-    .program-card {
-        background:white;
-        border-radius:15px;
-        box-shadow:0 8px 20px rgba(0,0,0,0.1);
-        overflow:hidden;
-        display:flex;
-        flex-direction:column;
-        transition:transform 0.2s,box-shadow 0.2s;
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.3px;
     }
-    .program-card:hover {
-        transform:translateY(-5px);
-        box-shadow:0 12px 25px rgba(0,0,0,0.15);
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 14px;
     }
-    .program-card img {
-        width:100%;
-        height:160px;
-        object-fit:cover;
+
+    .hero {
+      padding: 72px 0 30px;
     }
-    .program-content {
-        padding:15px;
-        flex-grow:1;
-        display:flex;
-        flex-direction:column;
-        justify-content:space-between;
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
     }
-    .program-title {
-        font-size:20px;
-        font-weight:bold;
-        margin-bottom:8px;
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
-    .program-description {
-        font-size:14px;
-        margin-bottom:12px;
-        color:#666;
+
+    .hero-main { padding: 34px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
     }
-    .links {
-        display:flex;
-        justify-content:space-between;
-        flex-wrap:wrap;
-        gap:10px;
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
     }
-    .btn-download, .btn-subscribe {
-        padding:10px 15px;
-        border:none;
-        border-radius:10px;
-        color:white;
-        font-weight:bold;
-        cursor:pointer;
-        text-decoration:none;
-        text-align:center;
-        flex:1;
-        transition:transform 0.2s, background 0.3s;
+
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 0 26px;
     }
-    .btn-download {
-        background: linear-gradient(90deg,#ff7e5f,#feb47b);
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
     }
-    .btn-download:hover {
-        background: linear-gradient(90deg,#feb47b,#ff7e5f);
-        transform:translateY(-2px);
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      font-weight: 600;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
     }
-    .btn-subscribe {
-        background: linear-gradient(90deg,#43e97b,#38f9d7);
+
+    .btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.22); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #9f7cff);
+      border-color: transparent;
+      color: white;
     }
-    .btn-subscribe:hover {
-        background: linear-gradient(90deg,#38f9d7,#43e97b);
-        transform:translateY(-2px);
+
+    .hero-side {
+      padding: 26px;
+      display: grid;
+      gap: 16px;
     }
+
+    .stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--card-strong);
+      border: 1px solid var(--border);
+    }
+
+    .stat .num {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .section {
+      padding: 26px 0 0;
+    }
+
+    .section h2 {
+      font-size: 30px;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .section p.sub {
+      margin: 0 0 20px;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 22px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p, .card li, .contact-item {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    ul.clean {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .contact-item {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+    }
+
     footer {
-        text-align:center;
-        padding:20px;
-        font-size:14px;
-        color:#555;
-        margin-top:40px;
+      padding: 32px 0 48px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
     }
-    @media(max-width:600px){
-        header { font-size:28px; padding:20px; }
-        .program-card img { height:120px; }
+
+    .accent { color: #dbe6ff; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .grid-3, .split { grid-template-columns: 1fr; }
+      .hero { padding-top: 42px; }
+      .hero-main { padding: 24px; }
     }
-</style>
+  </style>
 </head>
 <body>
+  <header>
+    <div class="container nav">
+      <div class="brand">SMM / Telegram / MAX</div>
+      <nav class="nav-links">
+        <a href="#about">Обо мне</a>
+        <a href="#services">Услуги</a>
+        <a href="#experience">Опыт</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </div>
+  </header>
 
-<header>Мои Программы</header>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="panel hero-main">
+          <div class="eyebrow">Открыт(а) к работе • SMM-менеджер • Контент и продвижение</div>
+          <h1>Ищу работу SMM-менеджером</h1>
+          <p class="lead">
+            Помогаю брендам и экспертам вести соцсети, делать понятный контент, писать посты и привлекать клиентов.
+            Рассматриваю Telegram, MAX и другие площадки. Делаю аккуратно, быстро и под задачу.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://t.me/MinionMl" target="_blank" rel="noopener">Написать в Telegram</a>
+            <a class="btn" href="mailto:minionspeak@internet.ru">Написать на почту</a>
+            <a class="btn" href="#services">Посмотреть услуги</a>
+          </div>
+        </div>
 
-<div class="container">
+        <aside class="panel hero-side">
+          <div class="stat">
+            <span class="num">Опыт</span>
+            <div class="contact-item">Есть опыт ведения социальных сетей, написания постов и работы с контентом под разные темы.</div>
+          </div>
+          <div class="stat">
+            <span class="num">Формат</span>
+            <div class="contact-item">Удалённо, на проект, на постоянную основу или как помощь с отдельными задачами.</div>
+          </div>
+          <div class="stat">
+            <span class="num">Подход</span>
+            <div class="contact-item">Делаю недорого, без лишней воды, с упором на результат и удобство для клиента.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-<!-- Пример блока программы -->
-<div class="program-card">
-    <img src="https://via.placeholder.com/400x160" alt="Программа 1">
-    <div class="program-content">
-        <div class="program-title">Программа 1</div>
-        <div class="program-description">Описание программы 1. Здесь можно добавить детали и функционал.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
+    <section id="about" class="section">
+      <h2>Обо мне</h2>
+      <p class="sub">
+        Я ищу работу SMM-менеджером и умею брать на себя задачи по контенту, коммуникации и оформлению публикаций.
+        Подхожу тем, кому нужен человек, который быстро включается в работу и делает всё по запросу.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Что умею</h3>
+          <p>Писать посты, адаптировать текст под аудиторию, помогать с контент-планом и оформлением публикаций.</p>
         </div>
-    </div>
-</div>
+        <div class="card">
+          <h3>Кому подойду</h3>
+          <p>Бизнесу, экспертам, блогам, небольшим командам и тем, кому нужен недорогой помощник по SMM.</p>
+        </div>
+        <div class="card">
+          <h3>Что важно</h3>
+          <p>Честная коммуникация, понятные сроки, адекватная цена и работа под конкретный запрос клиента.</p>
+        </div>
+      </div>
+    </section>
 
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
+    <section id="services" class="section">
+      <h2>Услуги</h2>
+      <p class="sub">Можно брать как отдельные задачи, так и комплексное ведение. Темы — любые, по вашему запросу.</p>
+      <div class="split">
+        <div class="card">
+          <h3>Основные услуги</h3>
+          <ul class="clean">
+            <li>Посты для Telegram, MAX и других площадок</li>
+            <li>Контент под блог, бренд или личную страницу</li>
+            <li>Короткие продающие и информационные тексты</li>
+            <li>Идеи для контента и оформление рубрик</li>
+            <li>Помощь с продвижением и регулярным ведением</li>
+          </ul>
         </div>
-    </div>
-    <div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
+        <div class="card">
+          <h3>Почему выбирают меня</h3>
+          <ul class="clean">
+            <li>Недорогие услуги</li>
+            <li>Быстрый отклик</li>
+            <li>Гибкая работа под задачу</li>
+            <li>Опыт и желание делать хорошо</li>
+            <li>Можно начать с малого и расширять сотрудничество</li>
+          </ul>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
+    <section id="experience" class="section">
+      <h2>Опыт и навыки</h2>
+      <p class="sub">
+        Здесь можно добавить реальные цифры, проекты и кейсы. Сейчас блок уже написан в хорошем, живом стиле и готов для публикации.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Контент</h3>
+          <p>Создание постов, адаптация под тон бренда, простая и понятная подача материала.</p>
         </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
+        <div class="card">
+          <h3>Коммуникация</h3>
+          <p>Быстро отвечаю, уточняю задачу и работаю так, чтобы клиенту было удобно.</p>
         </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
+        <div class="card">
+          <h3>Гибкость</h3>
+          <p>Подхожу к разным темам и форматам: от личных блогов до услуг и небольших проектов.</p>
         </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
-<div class="program-card">
-    <img src="https://avatars.mds.yandex.net/i?id=9aafafc3332f8b42ade4773f6b71f267_l-5234060-images-thumbs&n=13" alt="Программа 2">
-    <div class="program-content">
-        <div class="program-title">Программа 2</div>
-        <div class="program-description">Описание программы 2. Подробности, версия и инструкции.</div>
-        <div class="links">
-            <a href="#" class="btn-download">Скачать</a>
-            <a href="#" class="btn-subscribe">Подписаться</a>
-        </div>
-    </div>
+      </div>
+    </section>
 
+    <section id="contacts" class="section">
+      <h2>Контакты</h2>
+      <p class="sub">Связаться со мной можно напрямую. Лучше всего писать в Telegram.</p>
+      <div class="split">
+        <div class="card">
+          <h3>Связь</h3>
+          <div class="contact-list">
+            <div class="contact-item"><span class="accent">Telegram:</span> @MinionMl</div>
+            <div class="contact-item"><span class="accent">Почта:</span> minionspeak@internet.ru</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Что написать в первом сообщении</h3>
+          <p>
+            Коротко расскажите, какая задача нужна: ведение канала, посты, контент-план, тексты, оформление или помощь с продвижением.
+            Я отвечу и предложу удобный формат работы.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<footer>&copy; 2026 Мои Программы. Все права защищены.</footer>
-
+  <footer>
+    © 2026 • SMM-менеджер • Готово для GitHub Pages
+  </footer>
 </body>
 </html>
